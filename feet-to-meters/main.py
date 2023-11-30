@@ -5,18 +5,23 @@ from tkinter import ttk
 def calculate(*args):
     try:
         length1 = float(length1_entry.get())
+        from_unit = from_unit_combobox.get()
+        to_unit = to_unit_combobox.get()
 
-        converted_length = {
-            "meter": length1 * 0.3048,
-            "kilometer": length1 * 0.0003048,
-            "decimeter": length1 * 3.048,
-            "centimeter": length1 * 30.48,
-            "millimeter": length1 * 304.8,
-            "feet": length1,
-        }[to_unit_combobox.get()]
+        conversion_factor = {
+            "meter": 0.3048,
+            "kilometer": 0.0003048,
+            "decimeter": 3.048,
+            "centimeter": 30.48,
+            "millimeter": 304.8,
+            "feet": 1,
+        }
 
-        length2.set(converted_length)
+        converted_length = (length1 / conversion_factor[from_unit]) * conversion_factor[
+            to_unit
+        ]
 
+        length2.set(round(converted_length, 4))
     except ValueError:
         pass
 
@@ -38,16 +43,18 @@ length2_entry = ttk.Entry(main_frame, width=7, textvariable=length2)
 length2_entry.grid(column=2, row=2, sticky=(W, E))
 length2_entry.configure(state="readonly")
 
-ttk.Button(main_frame, text="Calculate").grid(column=3, row=3, sticky=W)
+ttk.Button(main_frame, text="Calculate", command=calculate).grid(
+    column=3, row=3, sticky=W
+)
 
-# from_unit_combobox = ttk.Combobox(
-#     main_frame,
-#     width=7,
-#     values=["meter", "kilometer", "decimeter", "centimeter", "millimeter", "feet"],
-# )
-# from_unit_combobox.grid(column=3, row=1, sticky=W)
-# from_unit_combobox.current(5)
-ttk.Label(main_frame, text="feet").grid(column=3, row=1, sticky=W)
+from_unit_combobox = ttk.Combobox(
+    main_frame,
+    width=7,
+    values=["meter", "kilometer", "decimeter", "centimeter", "millimeter", "feet"],
+)
+from_unit_combobox.grid(column=3, row=1, sticky=W)
+from_unit_combobox.current(5)
+# ttk.Label(main_frame, text="feet").grid(column=3, row=1, sticky=W)
 
 ttk.Label(main_frame, text="is equivalent to").grid(column=1, row=2, sticky=E)
 
