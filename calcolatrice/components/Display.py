@@ -11,10 +11,9 @@ class DisplayFrame(ttk.Frame):
 
     def create_widgets(self):
         # Create the widgets
-        display = ttk.Entry(self, width=300)
+        display = tk.Text(
+            self, width=300, height=1, font=("Helvetica", 32), state="disabled"
+        )
 
         # Place the widgets
         display.grid(row=0, column=0)
-
-        # Configure
-        display.configure(state="readonly")
