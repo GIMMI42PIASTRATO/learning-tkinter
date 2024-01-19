@@ -8,7 +8,7 @@ from tkinter import ttk
 class NumpadFrame(ttk.Frame):
     def __init__(self, container):
         super().__init__(container)
-        self.grid(row=1, column=0)
+        self.grid(row=1, column=0, sticky="nsew")
 
         self.create_widgets()
 
@@ -41,4 +41,4 @@ class NumpadFrame(ttk.Frame):
             for j in range(4):
                 print(f"i * 4 + j = {i * 4 + j}")
                 button = ttk.Button(self, text=button_text[i * 4 + j])
-                button.grid(row=i, column=j)
+                button.grid(row=i, column=j, sticky="nsew")
