@@ -10,10 +10,10 @@ class NumpadFrame(ttk.Frame):
         super().__init__(container)
         self.grid(row=1, column=0, sticky="nsew")
 
-        self.create_widgets()
+        self.create_widgets(container=container)
 
-    def create_widgets(self):
-        button_text = [
+    def create_widgets(self, container):
+        buttons_text = [
             "MEM",
             "STO",
             "M+",
@@ -35,10 +35,29 @@ class NumpadFrame(ttk.Frame):
             "+",
             "=",
         ]
-        print(len(button_text))
+        print(len(buttons_text))
 
         for i in range(5):
             for j in range(4):
                 print(f"i * 4 + j = {i * 4 + j}")
-                button = ttk.Button(self, text=button_text[i * 4 + j])
+                button_text_value = buttons_text[i * 4 + j]
+                button = ttk.Button(self, text=buttons_text[i * 4 + j])
+                button.bind("<Button-1>", self.onClick)
+
+                # Se il bottone cliccato non e un bottone correlato a quelli della memoria allora binda il bottone alla pressione del testo relativo al bottone stesso es: tasto 0 bindato a <KeyPress-0>
+                if button_text_value.isnumeric() or button_text_value in [
+                    "+",
+                    "-",
+                    "*",
+                    "/",
+                    ".",
+                ]:
+                    container.bind(
+                        f"<KeyPress>",
+                        lambda event, value=button_text_value: print(value),
+                    )
+
                 button.grid(row=i, column=j, sticky="nsew")
+
+    def onClick(self, event):
+        print(f"Hello World from {event.widget}")

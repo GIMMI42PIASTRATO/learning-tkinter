@@ -11,8 +11,12 @@ class DisplayFrame(ttk.Frame):
 
     def create_widgets(self):
         # Create the widgets
-        display = tk.Text(
-            self, width=300, height=1, font=("Helvetica", 32), state="disabled"
+        display = tk.Label(
+            self,
+            width=300,
+            height=1,
+            font=("Helvetica", 32),
+            text="Ciao sono una persona",
         )
 
         # Place the widgets
