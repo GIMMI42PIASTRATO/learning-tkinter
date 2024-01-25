@@ -88,8 +88,8 @@ class NumpadFrame(ttk.Frame):
             if "." not in display_text:
                 container.display.label["text"] += btn_text
 
-        elif btn_text == "=":
-            container.display.label["text"] = str(eval(display_text))
-
         elif btn_text == "C":
             container.display.label["text"] = "0"
+
+        elif btn_text == "=":
+            container.display.label["text"] = str(eval(display_text))
