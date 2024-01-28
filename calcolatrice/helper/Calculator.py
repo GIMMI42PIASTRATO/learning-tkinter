@@ -39,7 +39,12 @@ class Calculator:
             }[self.__operator]
 
             self.__result = compute()
+
+            self.__previous_number = self.__result
+
             return self.__result
+
+    # Calculations
 
     def __add(self) -> float:
         return self.__previous_number + self.__current_number
@@ -52,3 +57,10 @@ class Calculator:
 
     def __divide(self) -> float:
         return self.__previous_number / self.__current_number
+
+    def clear(self) -> None:
+        self.__previous_number = None
+        self.__current_number = None
+        self.__num_list = None
+        self.__operator = None
+        self.__result = None

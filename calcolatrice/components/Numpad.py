@@ -95,6 +95,7 @@ class NumpadFrame(ttk.Frame):
                 container.display.label["text"] += btn_text
 
         elif btn_text == "C":
+            self.calculator.clear()
             container.display.label["text"] = "0"
 
         # Calculations
