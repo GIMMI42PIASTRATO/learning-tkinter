@@ -3,32 +3,52 @@ import math
 
 class Calculator:
     def __init__(self) -> None:
-        self.__memory = 0
-        self.__result = 0
+        self.__previous_number = None
+        self.__current_number = None
+        self.__num_list = None
+        self.__operator = None
+        self.__result = None
 
-    # Getters and Setters
+    def __str__(self) -> str | None:
+        return f"Previous number: {self.__previous_number}\nCurrent number: {self.__current_number}\nOperator: {self.__operator}"
 
-    def getMemory(self):
-        return self.__memory
+    def solve_expression(self, expression: str) -> float:
+        separators = ["+", "-", "*", "/"]
+        for separator in separators:
+            string = " ".join(expression.split(separator))
+            if " " in string:
+                break
 
-    def setMemory(self, value):
-        self.__memory = value
+        self.__num_list = string.split()
+        self.__current_number = float(self.__num_list[-1])
 
-    def getResult(self):
-        return self.__result
+        if self.__previous_number == None:
+            self.__previous_number = self.__current_number
+            return None
+        else:
+            operators = ["+", "-", "*", "/"]
+            for operator in operators:
+                if operator in expression:
+                    self.__operator = operator
 
-    def setResult(self, value):
-        self.__result = value
+            compute = {
+                "+": self.__add,
+                "-": self.__subtract,
+                "*": self.__multiply,
+                "/": self.__divide,
+            }[self.__operator]
 
-    # Operations
+            self.__result = compute()
+            return self.__result
 
-    # Options
+    def __add(self) -> float:
+        return self.__previous_number + self.__current_number
 
-    def reset(self):
-        self.__result = 0
-        self.__isResult = False
+    def __subtract(self) -> float:
+        return self.__previous_number - self.__current_number
 
-    def clear(self):
-        self.__result = 0
-        self.__isResult = False
-        self.__operation = None
+    def __multiply(self) -> float:
+        return self.__previous_number * self.__current_number
+
+    def __divide(self) -> float:
+        return self.__previous_number / self.__current_number
