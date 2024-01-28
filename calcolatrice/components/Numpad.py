@@ -73,6 +73,7 @@ class NumpadFrame(ttk.Frame):
                 display_text == "0"
                 or display_text == "0.0"
                 or display_text == "Syntax Error"
+                or display_text == "Math Error"
             ):
                 container.display.label["text"] = btn_text
             else:
@@ -82,13 +83,18 @@ class NumpadFrame(ttk.Frame):
             if display_text[-1] in ["+", "-", "*", "/"]:
                 # L'implementazione commentata è superiore, ma il compito richiede di mostrare l'errore
                 # container.display.label["text"] = display_text[:-1] + btn_text
+                self.calculator.clear()
                 container.display.label["text"] = "Syntax Error"
             else:
-                result = self.calculator.solve_expression(display_text)
-                if not result:
-                    container.display.label["text"] += btn_text
-                else:
-                    container.display.label["text"] = str(result) + btn_text
+                try:
+                    result = self.calculator.solve_expression(display_text)
+                    if not result:
+                        container.display.label["text"] += btn_text
+                    else:
+                        container.display.label["text"] = str(result) + btn_text
+                except ZeroDivisionError:
+                    self.calculator.clear()
+                    container.display.label["text"] = "Math Error"
 
         elif btn_text == ".":
             if "." not in display_text:
@@ -101,4 +107,9 @@ class NumpadFrame(ttk.Frame):
         # Calculations
 
         elif btn_text == "=":
-            pass
+            try:
+                result = self.calculator.solve_expression(display_text)
+                container.display.label["text"] = str(result)
+            except ZeroDivisionError:
+                self.calculator.clear()
+                container.display.label["text"] = "Math Error"

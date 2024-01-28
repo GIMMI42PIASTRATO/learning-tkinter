@@ -13,13 +13,7 @@ class Calculator:
         return f"Previous number: {self.__previous_number}\nCurrent number: {self.__current_number}\nOperator: {self.__operator}"
 
     def solve_expression(self, expression: str) -> float:
-        separators = ["+", "-", "*", "/"]
-        for separator in separators:
-            string = " ".join(expression.split(separator))
-            if " " in string:
-                break
-
-        self.__num_list = string.split()
+        self.__num_list = self.__split_expression(expression)
         self.__current_number = float(self.__num_list[-1])
 
         if self.__previous_number == None:
@@ -44,6 +38,11 @@ class Calculator:
 
             return self.__result
 
+    def equals(self, expression: str) -> float:
+        self.__num_list = self.__split_expression(expression)
+        self.__current_number = float(self.__num_list[-1])
+        return self.__result
+
     # Calculations
 
     def __add(self) -> float:
@@ -56,7 +55,21 @@ class Calculator:
         return self.__previous_number * self.__current_number
 
     def __divide(self) -> float:
-        return self.__previous_number / self.__current_number
+        if self.__current_number == 0:
+            raise ZeroDivisionError
+        else:
+            return self.__previous_number / self.__current_number
+
+    # Helpers
+
+    def __split_expression(self, expression: str) -> list:
+        separators = ["+", "-", "*", "/"]
+        for separator in separators:
+            string = " ".join(expression.split(separator))
+            if " " in string:
+                break
+
+        return string.split()
 
     def clear(self) -> None:
         self.__previous_number = None
