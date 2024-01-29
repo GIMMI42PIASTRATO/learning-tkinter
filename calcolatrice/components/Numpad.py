@@ -3,7 +3,7 @@ from tkinter import ttk
 from helper.Calculator import Calculator
 
 
-# TODO Rinomina il file chiamandolo Numpad. Questo componente ciclera sulla classe button e li passera varie informazioni, questa classe sara anche quella che permette la renderizzazione di tutti i bottoni
+# TODO rendi il Bottone un componente separato passandoli come props il testo e il bind
 
 
 class NumpadFrame(ttk.Frame):
@@ -49,6 +49,7 @@ class NumpadFrame(ttk.Frame):
                     lambda event: self.onClick(event, container),
                 )
 
+                # TODO Implementa il bind dei tasti della tastiera
                 # Se il bottone cliccato non e un bottone correlato a quelli della memoria allora binda il bottone alla pressione del testo relativo al bottone stesso es: tasto 0 bindato a <KeyPress-0>
                 # if button_text_value.isnumeric() or button_text_value in [
                 #     "+",
@@ -68,6 +69,8 @@ class NumpadFrame(ttk.Frame):
         display_text = container.display.label["text"]
         btn_text = event.widget["text"]
 
+        # Display numbers
+
         if btn_text.isnumeric():
             if (
                 display_text == "0"
@@ -78,6 +81,8 @@ class NumpadFrame(ttk.Frame):
                 container.display.label["text"] = btn_text
             else:
                 container.display.label["text"] += btn_text
+
+        # Syntax Errors
 
         elif btn_text in ["+", "-", "*", "/"]:
             if display_text[-1] in ["+", "-", "*", "/"]:
@@ -99,6 +104,8 @@ class NumpadFrame(ttk.Frame):
             #         self.calculator.clear()
             #         container.display.label["text"] = "Math Error"
 
+        # Decimal point
+
         elif btn_text == ".":
             if "." not in display_text:
                 container.display.label["text"] += btn_text
@@ -118,3 +125,13 @@ class NumpadFrame(ttk.Frame):
             except ZeroDivisionError:
                 self.calculator.clear()
                 container.display.label["text"] = "Math Error"
+
+        # Memory
+        elif btn_text == "STO":
+            self.calculator.save_in_memory(float(display_text))
+
+        elif btn_text == "MEM":
+            container.display.label["text"] = str(self.calculator.read_memory())
+
+        elif btn_text == "M+":
+            self.calculator.add_to_memory(float(display_text))
