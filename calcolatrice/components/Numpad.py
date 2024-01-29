@@ -86,15 +86,18 @@ class NumpadFrame(ttk.Frame):
                 self.calculator.clear()
                 container.display.label["text"] = "Syntax Error"
             else:
-                try:
-                    result = self.calculator.solve_expression(display_text)
-                    if not result:
-                        container.display.label["text"] += btn_text
-                    else:
-                        container.display.label["text"] = str(result) + btn_text
-                except ZeroDivisionError:
-                    self.calculator.clear()
-                    container.display.label["text"] = "Math Error"
+                container.display.label["text"] += btn_text
+
+            # TODO codice per implementazione senza funzione eval()
+            #     try:
+            #         result = self.calculator.solve_expression(display_text)
+            #         if not result:
+            #             container.display.label["text"] += btn_text
+            #         else:
+            #             container.display.label["text"] = str(result) + btn_text
+            #     except ZeroDivisionError:
+            #         self.calculator.clear()
+            #         container.display.label["text"] = "Math Error"
 
         elif btn_text == ".":
             if "." not in display_text:
@@ -108,7 +111,9 @@ class NumpadFrame(ttk.Frame):
 
         elif btn_text == "=":
             try:
-                result = self.calculator.solve_expression(display_text)
+                result = self.calculator.equals(display_text)
+                # TODO codice per implementazione senza funzione eval()
+                # result = self.calculator.solve_expression(display_text)
                 container.display.label["text"] = str(result)
             except ZeroDivisionError:
                 self.calculator.clear()
