@@ -44,11 +44,8 @@ class Calculator:
     #         return self.__result
 
     def equals(self, expression: str) -> float:
-        try:
-            self.__result = eval(expression)
-            return self.__result
-        except ZeroDivisionError:
-            raise ZeroDivisionError
+        self.__result = eval(expression)
+        return self.__result
 
         # TODO codice per implementazione senza funzione eval()
         # self.__num_list = self.__split_expression(expression)
@@ -88,7 +85,7 @@ class Calculator:
         self.__current_number = None
         self.__num_list = None
         self.__operator = None
-        self.__result = None
+        # self.__result = None
 
     # STO
     def save_in_memory(self, value: float) -> None:

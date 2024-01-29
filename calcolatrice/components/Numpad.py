@@ -112,7 +112,9 @@ class NumpadFrame(ttk.Frame):
 
         elif btn_text == "C":
             self.calculator.clear()
-            container.display.label["text"] = "0"
+            container.display.label["text"] = display_text[:-1]
+            if len(container.display.label["text"]) == 0:
+                container.display.label["text"] = "0"
 
         # Calculations
 
@@ -125,6 +127,9 @@ class NumpadFrame(ttk.Frame):
             except ZeroDivisionError:
                 self.calculator.clear()
                 container.display.label["text"] = "Math Error"
+            except SyntaxError:
+                self.calculator.clear()
+                container.display.label["text"] = "Syntax Error"
 
         # Memory
         elif btn_text == "STO":
