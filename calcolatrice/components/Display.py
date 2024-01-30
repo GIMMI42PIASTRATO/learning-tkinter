@@ -6,7 +6,7 @@ class DisplayFrame(ttk.Frame):
     def __init__(self, container):
         super().__init__(container)
         self.grid(
-            row=0,
+            row=1,
             column=0,
         )
 

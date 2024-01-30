@@ -1,4 +1,5 @@
 import math
+from components.Memory import Memory
 
 
 class Calculator:
@@ -96,6 +97,13 @@ class Calculator:
             # Risultato ultima operazione
             self.__memory = self.__result
 
+        if self.__memory != 0 or self.__memory != None:
+            # Fa il display della M
+            Memory.activate()
+        else:
+            # Rimuove la M dallo schermo
+            Memory.deactivate()
+
     # MEM
     def read_memory(self) -> float:
         return self.__memory
@@ -112,3 +120,10 @@ class Calculator:
         else:
             # Aggiunge risultato ultima operazione alla memoria
             self.__memory += self.__result
+
+        if self.__memory != 0:
+            # Fa il display della M
+            Memory.activate()
+        else:
+            # Rimuove la M dallo schermo
+            Memory.deactivate()

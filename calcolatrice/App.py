@@ -4,6 +4,7 @@ from tkinter import ttk
 # Components import
 from components.Display import DisplayFrame
 from components.Numpad import NumpadFrame
+from components.Memory import Memory
 
 
 class App(tk.Tk):
@@ -17,6 +18,7 @@ class App(tk.Tk):
         # Renderizzazione dei componenti
         self.display = DisplayFrame(container=self)
         self.numpad = NumpadFrame(container=self)
+        self.memory = Memory(container=self)
 
     def onClick(self):
         print("Hello World")

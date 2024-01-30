@@ -9,7 +9,7 @@ from helper.Calculator import Calculator
 class NumpadFrame(ttk.Frame):
     def __init__(self, container):
         super().__init__(container)
-        self.grid(row=1, column=0, sticky="nsew")
+        self.grid(row=2, column=0, sticky="nsew")
         self.calculator = Calculator()
 
         self.create_widgets(container)
