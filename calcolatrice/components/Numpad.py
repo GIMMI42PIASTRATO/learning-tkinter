@@ -20,6 +20,18 @@ class NumpadFrame(ttk.Frame):
             "STO",
             "M+",
             "C",
+            "CE",
+            "sin",
+            "cos",
+            "tan",
+            "sec",
+            "csc",
+            "x^2",
+            "x^n",
+            "\u221A",
+            "\u02E3\u221A",
+            "n!",
+            "1/n",
             "7",
             "8",
             "9",
@@ -39,11 +51,12 @@ class NumpadFrame(ttk.Frame):
         ]
         print(len(buttons_text))
 
-        for i in range(5):
+        for i in range(8):
             for j in range(4):
                 print(f"i * 4 + j = {i * 4 + j}")
                 button_text_value = buttons_text[i * 4 + j]
                 button = ttk.Button(self, text=buttons_text[i * 4 + j])
+
                 button.bind(
                     "<Button-1>",
                     lambda event: self.onClick(event, container),
@@ -63,7 +76,10 @@ class NumpadFrame(ttk.Frame):
                 #         lambda event, value=button_text_value: print(value),
                 #     )
 
-                button.grid(row=i, column=j, sticky="nsew")
+                if i < 3:
+                    button.grid(row=i, column=j, sticky="nsew", ipadx=5, ipady=5)
+                else:
+                    button.grid(row=i, column=j, sticky="nsew", ipadx=5, ipady=20)
 
     def onClick(self, event, container):
         display_text = container.display.label["text"]
