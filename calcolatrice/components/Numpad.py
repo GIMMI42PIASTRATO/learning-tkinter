@@ -158,6 +158,15 @@ class NumpadFrame(ttk.Frame):
         except Exception:
             container.display.label["text"] = "Math Error"
 
+    def sqrt(self, container):
+        try:
+            result = self.calculator.sqrt(float(container.display.label["text"]))
+            container.display.label["text"] = str(result)
+        except ValueError:
+            container.display.label["text"] = "Syntax Error"
+        except Exception:
+            container.display.label["text"] = "Math Error"
+
     def onClick(self, event, container):
         self.display_text = container.display.label["text"]
         self.btn_text = event.widget["text"]
@@ -170,29 +179,34 @@ class NumpadFrame(ttk.Frame):
         # Syntax Errors
 
         elif self.btn_text in ["+", "-", "*", "/"]:
-            self.operators_err(self, container)
+            self.operators_err(container)
 
         # Decimal point
 
         elif self.btn_text == ".":
-            self.decimal_point(self, container)
+            self.decimal_point(container)
 
         elif self.btn_text == "C":
-            self.delete(self, container)
+            self.delete(container)
 
         # Calculations
 
         elif self.btn_text == "=":
-            self.equal(self, container)
+            self.equal(container)
 
         elif self.btn_text == "sin":
-            self.sin(self, container)
+            self.sin(container)
 
         elif self.btn_text == "cos":
-            self.cos(self, container)
+            self.cos(container)
 
         elif self.btn_text == "tan":
-            self.tan(self, container)
+            self.tan(container)
+
+        # TODO sec csc
+
+        elif self.btn_text == "x^2":
+            self.sqrt(container)
 
         # Memory
         elif self.btn_text == "STO":
