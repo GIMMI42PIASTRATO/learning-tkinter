@@ -81,101 +81,125 @@ class NumpadFrame(ttk.Frame):
                 else:
                     button.grid(row=i, column=j, sticky="nsew", ipadx=5, ipady=25)
 
+    def display_nums(self, container):
+        if (
+            self.display_text == "0"
+            or self.display_text == "0.0"
+            or self.display_text == "Syntax Error"
+            or self.display_text == "Math Error"
+        ):
+            container.display.label["text"] = self.btn_text
+        else:
+            container.display.label["text"] += self.btn_text
+
+    def operators_err(self, container):
+        if self.display_text[-1] in ["+", "-", "*", "/"]:
+            # L'implementazione commentata è superiore, ma il compito richiede di mostrare l'errore
+            # container.display.label["text"] = display_text[:-1] + btn_text
+            self.calculator.clear()
+            container.display.label["text"] = "Syntax Error"
+        else:
+            container.display.label["text"] += self.btn_text
+
+            # TODO codice per implementazione senza funzione eval()
+        #     try:
+        #         result = self.calculator.solve_expression(display_text)
+        #         if not result:
+        #             container.display.label["text"] += btn_text
+        #         else:
+        #             container.display.label["text"] = str(result) + btn_text
+        #     except ZeroDivisionError:
+        #         self.calculator.clear()
+        #         container.display.label["text"] = "Math Error"
+
+    def decimal_point(self, container):
+        if "." not in self.display_text:
+            container.display.label["text"] += self.btn_text
+
+    def delete(self, container):
+        self.calculator.clear()
+        container.display.label["text"] = self.display_text[:-1]
+        if len(container.display.label["text"]) == 0:
+            container.display.label["text"] = "0"
+
+    def equal(self, container):
+        try:
+            result = self.calculator.equals(self.display_text)
+            # TODO codice per implementazione senza funzione eval()
+            # result = self.calculator.solve_expression(display_text)
+            container.display.label["text"] = str(result)
+        except ZeroDivisionError:
+            self.calculator.clear()
+            container.display.label["text"] = "Math Error"
+        except SyntaxError:
+            self.calculator.clear()
+            container.display.label["text"] = "Syntax Error"
+
+    def sin(self, container):
+        try:
+            result = self.calculator.sin(float(container.display.label["text"]))
+            container.display.label["text"] = str(result)
+        except:
+            container.display.label["text"] = "Syntax Error"
+
+    def cos(self, container):
+        try:
+            result = self.calculator.cos(float(container.display.label["text"]))
+            container.display.label["text"] = str(result)
+        except ValueError:
+            container.display.label["text"] = "Syntax Error"
+
+    def tan(self, container):
+        try:
+            result = self.calculator.tan(float(container.display.label["text"]))
+            container.display.label["text"] = str(result)
+        except ValueError:
+            container.display.label["text"] = "Syntax Error"
+        except Exception:
+            container.display.label["text"] = "Math Error"
+
     def onClick(self, event, container):
-        display_text = container.display.label["text"]
-        btn_text = event.widget["text"]
+        self.display_text = container.display.label["text"]
+        self.btn_text = event.widget["text"]
 
         # Display numbers
 
-        if btn_text.isnumeric():
-            if (
-                display_text == "0"
-                or display_text == "0.0"
-                or display_text == "Syntax Error"
-                or display_text == "Math Error"
-            ):
-                container.display.label["text"] = btn_text
-            else:
-                container.display.label["text"] += btn_text
+        if self.btn_text.isnumeric():
+            self.display_nums(container)
 
         # Syntax Errors
 
-        elif btn_text in ["+", "-", "*", "/"]:
-            if display_text[-1] in ["+", "-", "*", "/"]:
-                # L'implementazione commentata è superiore, ma il compito richiede di mostrare l'errore
-                # container.display.label["text"] = display_text[:-1] + btn_text
-                self.calculator.clear()
-                container.display.label["text"] = "Syntax Error"
-            else:
-                container.display.label["text"] += btn_text
-
-            # TODO codice per implementazione senza funzione eval()
-            #     try:
-            #         result = self.calculator.solve_expression(display_text)
-            #         if not result:
-            #             container.display.label["text"] += btn_text
-            #         else:
-            #             container.display.label["text"] = str(result) + btn_text
-            #     except ZeroDivisionError:
-            #         self.calculator.clear()
-            #         container.display.label["text"] = "Math Error"
+        elif self.btn_text in ["+", "-", "*", "/"]:
+            self.operators_err(self, container)
 
         # Decimal point
 
-        elif btn_text == ".":
-            if "." not in display_text:
-                container.display.label["text"] += btn_text
+        elif self.btn_text == ".":
+            self.decimal_point(self, container)
 
-        elif btn_text == "C":
-            self.calculator.clear()
-            container.display.label["text"] = display_text[:-1]
-            if len(container.display.label["text"]) == 0:
-                container.display.label["text"] = "0"
+        elif self.btn_text == "C":
+            self.delete(self, container)
 
         # Calculations
 
-        elif btn_text == "=":
-            try:
-                result = self.calculator.equals(display_text)
-                # TODO codice per implementazione senza funzione eval()
-                # result = self.calculator.solve_expression(display_text)
-                container.display.label["text"] = str(result)
-            except ZeroDivisionError:
-                self.calculator.clear()
-                container.display.label["text"] = "Math Error"
-            except SyntaxError:
-                self.calculator.clear()
-                container.display.label["text"] = "Syntax Error"
+        elif self.btn_text == "=":
+            self.equal(self, container)
 
-        elif btn_text == "sin":
-            try:
-                result = self.calculator.sin(float(container.display.label["text"]))
-                container.display.label["text"] = str(result)
-            except:
-                container.display.label["text"] = "Syntax Error"
+        elif self.btn_text == "sin":
+            self.sin(self, container)
 
-        elif btn_text == "cos":
-            try:
-                result = self.calculator.cos(float(container.display.label["text"]))
-                container.display.label["text"] = str(result)
-            except ValueError:
-                container.display.label["text"] = "Syntax Error"
+        elif self.btn_text == "cos":
+            self.cos(self, container)
 
-        elif btn_text == "tan":
-            try:
-                result = self.calculator.tan(float(container.display.label["text"]))
-                container.display.label["text"] = str(result)
-            except ValueError:
-                container.display.label["text"] = "Syntax Error"
-            except Exception:
-                container.display.label["text"] = "Math Error"
+        elif self.btn_text == "tan":
+            self.tan(self, container)
 
         # Memory
-        elif btn_text == "STO":
-            self.calculator.save_in_memory(float(display_text))
+        elif self.btn_text == "STO":
+            self.calculator.save_in_memory(float(self.display_text))
 
-        elif btn_text == "MEM":
+        elif self.btn_text == "MEM":
             container.display.label["text"] = str(self.calculator.read_memory())
 
-        elif btn_text == "M+":
-            self.calculator.add_to_memory(float(display_text))
+        elif self.btn_text == "M+":
+            self.calculator.add_to_memory(float(self.display_text))

@@ -17,34 +17,6 @@ class Calculator:
     def __str__(self) -> str | None:
         return f"Previous number: {self.__previous_number}\nCurrent number: {self.__current_number}\nOperator: {self.__operator}"
 
-    # Algoritmo per la risoluzione di espressioni matematiche, non funzionante con i numeri negativi, per questioni di tempo quindi utilizzerò la funzione eval() di python, in seguito implementerò l'algoritmo senza l'utilizzo di funzioni già esistenti
-    # TODO codice per implementazione senza funzione eval()
-    # def solve_expression(self, expression: str) -> float:
-    #     self.__num_list = self.__split_expression(expression)
-    #     self.__current_number = float(self.__num_list[-1])
-
-    #     if self.__previous_number == None:
-    #         self.__previous_number = self.__current_number
-    #         return None
-    #     else:
-    #         operators = ["+", "-", "*", "/"]
-    #         for operator in operators:
-    #             if operator in expression:
-    #                 self.__operator = operator
-
-    #         compute = {
-    #             "+": self.__add,
-    #             "-": self.__subtract,
-    #             "*": self.__multiply,
-    #             "/": self.__divide,
-    #         }[self.__operator]
-
-    #         self.__result = compute()
-
-    #         self.__previous_number = self.__result
-
-    #         return self.__result
-
     def equals(self, expression: str) -> float:
         self.__result = eval(expression)
         return self.__result
@@ -55,21 +27,6 @@ class Calculator:
         # return self.__result
 
     # Calculations
-
-    # def __add(self) -> float:
-    #     return self.__previous_number + self.__current_number
-
-    # def __subtract(self) -> float:
-    #     return self.__previous_number - self.__current_number
-
-    # def __multiply(self) -> float:
-    #     return self.__previous_number * self.__current_number
-
-    # def __divide(self) -> float:
-    #     if self.__current_number == 0:
-    #         raise ZeroDivisionError
-    #     else:
-    #         return self.__previous_number / self.__current_number
 
     def sin(self, value: float) -> float:
         return math.sin(math.radians(value))
@@ -140,3 +97,46 @@ class Calculator:
         else:
             # Rimuove la M dallo schermo
             Memory.deactivate()
+
+    # Algoritmo per la risoluzione di espressioni matematiche, non funzionante con i numeri negativi, per questioni di tempo quindi utilizzerò la funzione eval() di python, in seguito implementerò l'algoritmo senza l'utilizzo di funzioni già esistenti
+    # TODO codice per implementazione senza funzione eval()
+    # def solve_expression(self, expression: str) -> float:
+    #     self.__num_list = self.__split_expression(expression)
+    #     self.__current_number = float(self.__num_list[-1])
+
+    #     if self.__previous_number == None:
+    #         self.__previous_number = self.__current_number
+    #         return None
+    #     else:
+    #         operators = ["+", "-", "*", "/"]
+    #         for operator in operators:
+    #             if operator in expression:
+    #                 self.__operator = operator
+
+    #         compute = {
+    #             "+": self.__add,
+    #             "-": self.__subtract,
+    #             "*": self.__multiply,
+    #             "/": self.__divide,
+    #         }[self.__operator]
+
+    #         self.__result = compute()
+
+    #         self.__previous_number = self.__result
+
+    #         return self.__result
+
+    # def __add(self) -> float:
+    #     return self.__previous_number + self.__current_number
+
+    # def __subtract(self) -> float:
+    #     return self.__previous_number - self.__current_number
+
+    # def __multiply(self) -> float:
+    #     return self.__previous_number * self.__current_number
+
+    # def __divide(self) -> float:
+    #     if self.__current_number == 0:
+    #         raise ZeroDivisionError
+    #     else:
+    #         return self.__previous_number / self.__current_number
