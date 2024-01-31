@@ -69,6 +69,16 @@ class Calculator:
             raise ZeroDivisionError
         else:
             return self.__previous_number / self.__current_number
+        
+    def sin(self, value: float):
+        math.sin(math.radians(value))
+
+    def cos(self, value: float):
+        math.cos(math.radians(value))
+
+    def tan(self, value: float):
+        pass
+            
 
     # Helpers
 
