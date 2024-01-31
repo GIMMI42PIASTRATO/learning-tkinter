@@ -79,7 +79,7 @@ class NumpadFrame(ttk.Frame):
                 if i < 3:
                     button.grid(row=i, column=j, sticky="nsew", ipadx=5, ipady=5)
                 else:
-                    button.grid(row=i, column=j, sticky="nsew", ipadx=5, ipady=20)
+                    button.grid(row=i, column=j, sticky="nsew", ipadx=5, ipady=25)
 
     def onClick(self, event, container):
         display_text = container.display.label["text"]
@@ -146,6 +146,29 @@ class NumpadFrame(ttk.Frame):
             except SyntaxError:
                 self.calculator.clear()
                 container.display.label["text"] = "Syntax Error"
+
+        elif btn_text == "sin":
+            try:
+                result = self.calculator.sin(float(container.display.label["text"]))
+                container.display.label["text"] = str(result)
+            except:
+                container.display.label["text"] = "Syntax Error"
+
+        elif btn_text == "cos":
+            try:
+                result = self.calculator.cos(float(container.display.label["text"]))
+                container.display.label["text"] = str(result)
+            except ValueError:
+                container.display.label["text"] = "Syntax Error"
+
+        elif btn_text == "tan":
+            try:
+                result = self.calculator.tan(float(container.display.label["text"]))
+                container.display.label["text"] = str(result)
+            except ValueError:
+                container.display.label["text"] = "Syntax Error"
+            except Exception:
+                container.display.label["text"] = "Math Error"
 
         # Memory
         elif btn_text == "STO":

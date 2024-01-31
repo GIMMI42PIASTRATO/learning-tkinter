@@ -1,5 +1,6 @@
 import math
 from components.Memory import Memory
+from uu import Error
 
 
 class Calculator:
@@ -55,30 +56,32 @@ class Calculator:
 
     # Calculations
 
-    def __add(self) -> float:
-        return self.__previous_number + self.__current_number
+    # def __add(self) -> float:
+    #     return self.__previous_number + self.__current_number
 
-    def __subtract(self) -> float:
-        return self.__previous_number - self.__current_number
+    # def __subtract(self) -> float:
+    #     return self.__previous_number - self.__current_number
 
-    def __multiply(self) -> float:
-        return self.__previous_number * self.__current_number
+    # def __multiply(self) -> float:
+    #     return self.__previous_number * self.__current_number
 
-    def __divide(self) -> float:
-        if self.__current_number == 0:
-            raise ZeroDivisionError
+    # def __divide(self) -> float:
+    #     if self.__current_number == 0:
+    #         raise ZeroDivisionError
+    #     else:
+    #         return self.__previous_number / self.__current_number
+
+    def sin(self, value: float) -> float:
+        return math.sin(math.radians(value))
+
+    def cos(self, value: float) -> float:
+        return math.cos(math.radians(value))
+
+    def tan(self, value: float) -> float | None:
+        if abs(math.radians(value) % (math.pi / 2)) < 1e-15:
+            raise Exception("Math Error")
         else:
-            return self.__previous_number / self.__current_number
-        
-    def sin(self, value: float):
-        math.sin(math.radians(value))
-
-    def cos(self, value: float):
-        math.cos(math.radians(value))
-
-    def tan(self, value: float):
-        pass
-            
+            return math.tan(math.radians(value))
 
     # Helpers
 
