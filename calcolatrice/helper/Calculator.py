@@ -10,12 +10,11 @@ class Calculator:
         # self.__current_number = None
         # self.__num_list = None
 
-        self.__operator = None
         self.__result = None
         self.__memory = None
 
     def __str__(self) -> str | None:
-        return f"Previous number: {self.__previous_number}\nCurrent number: {self.__current_number}\nOperator: {self.__operator}"
+        return f"Previous number: {self.__previous_number}\nCurrent number: {self.__current_number}"
 
     def equals(self, expression: str) -> float:
         self.__result = eval(expression)
@@ -32,13 +31,25 @@ class Calculator:
         return math.sin(math.radians(value))
 
     def cos(self, value: float) -> float:
-        return math.cos(math.radians(value))
+        return round(math.cos(math.radians(value)), 15)
 
     def tan(self, value: float) -> float | None:
         if abs(math.radians(value) % (math.pi / 2)) < 1e-15:
             raise Exception("Math Error")
         else:
             return math.tan(math.radians(value))
+
+    def sec(self, value: float) -> float | None:
+        if round(math.cos(math.radians(value)), 15) == 0:
+            raise Exception("Math Error")
+        else:
+            return 1 / math.cos(math.radians(value))
+
+    def csc(self, value: float) -> float | None:
+        if abs(math.radians(value) % math.pi) < 1e-15:
+            raise Exception("Math Error")
+        else:
+            return 1 / math.sin(math.radians(value))
 
     def square(self, value: float) -> float:
         return value**2
@@ -75,26 +86,28 @@ class Calculator:
 
     # Helpers
 
-    def __split_expression(self, expression: str) -> list:
-        separators = ["+", "-", "*", "/"]
-        for separator in separators:
-            string = " ".join(expression.split(separator))
-            if " " in string:
-                break
+    # def __split_expression(self, expression: str) -> list:
+    #     separators = ["+", "-", "*", "/"]
+    #     for separator in separators:
+    #         string = " ".join(expression.split(separator))
+    #         if " " in string:
+    #             break
 
-        return string.split()
+    #     return string.split()
 
-    def clear(self) -> None:
-        self.__previous_number = None
-        self.__current_number = None
-        self.__num_list = None
-        self.__operator = None
-        # self.__result = None
+    # def clear(self) -> None:
+    #     self.__previous_number = None
+    #     self.__current_number = None
+    #     self.__num_list = None
+    #     self.__operator = None
+    #     # self.__result = None
 
     # Memory
 
     # STO
     def save_in_memory(self, value: float) -> None:
+        print(self.__result)
+        print(value)
         if self.__result == None:
             # Salva il numero sullo schermo in memoria
             self.__memory = value
@@ -102,7 +115,7 @@ class Calculator:
             # Salva il risultato dell'ultima operazione in memoria
             self.__memory = self.__result
 
-        if self.__memory != 0 or self.__memory != None:
+        if self.__memory != 0 and self.__memory != None:
             # Fa il display della M
             Memory.activate()
         else:

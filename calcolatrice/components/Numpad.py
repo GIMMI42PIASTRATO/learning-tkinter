@@ -22,10 +22,10 @@ class NumpadFrame(ttk.Frame):
             "STO",
             "M+",
             "C",
-            "CE",
             "sin",
             "cos",
             "tan",
+            "CE",
             "sec",
             "csc",
             "x^2",
@@ -78,7 +78,7 @@ class NumpadFrame(ttk.Frame):
                 #         lambda event, value=button_text_value: print(value),
                 #     )
 
-                if i < 3:
+                if i < 4:
                     button.grid(row=i, column=j, sticky="nsew", ipadx=5, ipady=5)
                 else:
                     button.grid(row=i, column=j, sticky="nsew", ipadx=5, ipady=25)
@@ -100,7 +100,7 @@ class NumpadFrame(ttk.Frame):
         if self.display_text[-1] in ["+", "-", "*", "/"]:
             # L'implementazione commentata è superiore, ma il compito richiede di mostrare l'errore
             # container.display.label["text"] = display_text[:-1] + btn_text
-            self.calculator.clear()
+            # self.calculator.clear()
             container.display.label["text"] = "Syntax Error"
         else:
             container.display.label["text"] += self.btn_text
@@ -121,7 +121,7 @@ class NumpadFrame(ttk.Frame):
             container.display.label["text"] += self.btn_text
 
     def delete(self, container):
-        self.calculator.clear()
+        # self.calculator.clear()
         container.display.label["text"] = self.display_text[:-1]
         if len(container.display.label["text"]) == 0:
             container.display.label["text"] = "0"
@@ -141,10 +141,10 @@ class NumpadFrame(ttk.Frame):
                 # result = self.calculator.solve_expression(display_text)
                 container.display.label["text"] = str(result)
             except ZeroDivisionError:
-                self.calculator.clear()
+                # self.calculator.clear()
                 container.display.label["text"] = "Math Error"
             except SyntaxError:
-                self.calculator.clear()
+                # self.calculator.clear()
                 container.display.label["text"] = "Syntax Error"
 
     def sin(self, container):
@@ -167,6 +167,26 @@ class NumpadFrame(ttk.Frame):
         self.equal(container)
         try:
             result = self.calculator.tan(float(container.display.label["text"]))
+            container.display.label["text"] = str(result)
+        except ValueError:
+            container.display.label["text"] = "Syntax Error"
+        except Exception:
+            container.display.label["text"] = "Math Error"
+
+    def sec(self, container):
+        self.equal(container)
+        try:
+            result = self.calculator.sec(float(container.display.label["text"]))
+            container.display.label["text"] = str(result)
+        except ValueError:
+            container.display.label["text"] = "Syntax Error"
+        except Exception:
+            container.display.label["text"] = "Math Error"
+
+    def csc(self, container):
+        self.equal(container)
+        try:
+            result = self.calculator.csc(float(container.display.label["text"]))
             container.display.label["text"] = str(result)
         except ValueError:
             container.display.label["text"] = "Syntax Error"
@@ -265,6 +285,9 @@ class NumpadFrame(ttk.Frame):
         elif self.btn_text == "C":
             self.delete(container)
 
+        elif self.btn_text == "CE":
+            container.display.label["text"] = "0"
+
         # Calculations
 
         elif self.btn_text == "=":
@@ -279,7 +302,11 @@ class NumpadFrame(ttk.Frame):
         elif self.btn_text == "tan":
             self.tan(container)
 
-        # TODO sec csc
+        elif self.btn_text == "sec":
+            self.sec(container)
+
+        elif self.btn_text == "csc":
+            self.csc(container)
 
         elif self.btn_text == "x^2":
             self.square(container)
@@ -302,7 +329,7 @@ class NumpadFrame(ttk.Frame):
         # Memory
         elif self.btn_text == "STO":
             try:
-                self.calculator.save_in_memory(float(self.display_text[-1]))
+                self.calculator.save_in_memory(float(self.display_text))
             except ValueError:
                 container.display.label["text"] = "Syntax Error"
 

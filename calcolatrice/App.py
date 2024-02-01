@@ -12,8 +12,8 @@ class App(tk.Tk):
         # Inizzializzazione della finestra root
         super().__init__()
         self.title("Calculator")
-        self.geometry("400x300")
-        self.minsize(400, 300)
+        self.geometry("350x525")
+        self.resizable(False, False)
 
         # Renderizzazione dei componenti
         self.display = DisplayFrame(container=self)
