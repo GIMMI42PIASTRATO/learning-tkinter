@@ -13,7 +13,7 @@ class Calculator:
         self.__result = None
         self.__memory = None
 
-    def __str__(self) -> str | None:
+    def __str__(self) -> str:
         return f"Previous number: {self.__previous_number}\nCurrent number: {self.__current_number}"
 
     def equals(self, expression: str) -> float:
@@ -108,12 +108,12 @@ class Calculator:
     def save_in_memory(self, value: float) -> None:
         print(self.__result)
         print(value)
-        if self.__result == None:
-            # Salva il numero sullo schermo in memoria
-            self.__memory = value
-        else:
+        if value == 0:
             # Salva il risultato dell'ultima operazione in memoria
             self.__memory = self.__result
+        else:
+            # Salva il numero sullo schermo in memoria
+            self.__memory = value
 
         if self.__memory != 0 and self.__memory != None:
             # Fa il display della M
@@ -131,12 +131,12 @@ class Calculator:
 
     # M+
     def add_to_memory(self, value: float) -> None:
-        if self.__result == None:
-            # Aggiunge numero sullo schermo alla memoria
-            self.__memory += value
-        else:
-            # Aggiunge risultato ultima operazione alla memoria
+        if value == 0:
+            # Aggiunge il risultato dell'ultima operazione alla memoria
             self.__memory += self.__result
+        else:
+            # Aggiunge il numero sullo schermo alla memoria
+            self.__memory += value
 
         if self.__memory != 0:
             # Fa il display della M

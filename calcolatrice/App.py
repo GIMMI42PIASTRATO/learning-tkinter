@@ -20,9 +20,6 @@ class App(tk.Tk):
         self.numpad = NumpadFrame(container=self)
         self.memory = Memory(container=self)
 
-    def onClick(self):
-        print("Hello World")
-
 
 if __name__ == "__main__":
     app = App()
