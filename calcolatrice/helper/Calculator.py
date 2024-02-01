@@ -91,13 +91,15 @@ class Calculator:
         self.__operator = None
         # self.__result = None
 
+    # Memory
+
     # STO
     def save_in_memory(self, value: float) -> None:
         if self.__result == None:
-            # Numero sullo schermo
+            # Salva il numero sullo schermo in memoria
             self.__memory = value
         else:
-            # Risultato ultima operazione
+            # Salva il risultato dell'ultima operazione in memoria
             self.__memory = self.__result
 
         if self.__memory != 0 or self.__memory != None:
@@ -109,14 +111,13 @@ class Calculator:
 
     # MEM
     def read_memory(self) -> float:
+        if self.__memory == None:
+            # Se nulla è salvato in memoria non fa nulla
+            return
         return self.__memory
 
     # M+
     def add_to_memory(self, value: float) -> None:
-        if self.__memory == None:
-            # Se nulla è salvato in memoria non fa nulla
-            return
-
         if self.__result == None:
             # Aggiunge numero sullo schermo alla memoria
             self.__memory += value

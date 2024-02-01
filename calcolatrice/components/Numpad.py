@@ -148,6 +148,7 @@ class NumpadFrame(ttk.Frame):
                 container.display.label["text"] = "Syntax Error"
 
     def sin(self, container):
+        self.equal(container)
         try:
             result = self.calculator.sin(float(container.display.label["text"]))
             container.display.label["text"] = str(result)
@@ -155,6 +156,7 @@ class NumpadFrame(ttk.Frame):
             container.display.label["text"] = "Syntax Error"
 
     def cos(self, container):
+        self.equal(container)
         try:
             result = self.calculator.cos(float(container.display.label["text"]))
             container.display.label["text"] = str(result)
@@ -162,6 +164,7 @@ class NumpadFrame(ttk.Frame):
             container.display.label["text"] = "Syntax Error"
 
     def tan(self, container):
+        self.equal(container)
         try:
             result = self.calculator.tan(float(container.display.label["text"]))
             container.display.label["text"] = str(result)
@@ -298,7 +301,10 @@ class NumpadFrame(ttk.Frame):
 
         # Memory
         elif self.btn_text == "STO":
-            self.calculator.save_in_memory(float(self.display_text))
+            try:
+                self.calculator.save_in_memory(float(self.display_text[-1]))
+            except ValueError:
+                container.display.label["text"] = "Syntax Error"
 
         elif self.btn_text == "MEM":
             container.display.label["text"] = str(self.calculator.read_memory())
