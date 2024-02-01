@@ -44,29 +44,34 @@ class Calculator:
         return value**2
 
     def n_exponent(self, value: float, n: float) -> float:
-        # TODO implementa il modo per effettivamente prender dal display il numero di cui fare l'esponente
-        return value**n
+        try:
+            return value**n
+        except ValueError:
+            raise Exception("Syntax Error")
 
     def sqrt(self, value: float) -> float:
         if value < 0:
-            raise ValueError("Math Error")
+            raise Exception("Math Error")
         else:
             return math.sqrt(value)
 
     def n_root(self, value: float, n: float) -> float:
         if value < 0:
-            raise ValueError("Math Error")
+            raise Exception("Math Error")
         else:
             return value ** (1 / n)
 
     def factorial(self, value: float) -> float:
         if value < 0:
-            raise ValueError("Math Error")
+            raise Exception("Math Error")
         else:
             return math.factorial(value)
 
     def mutual(self, value: float) -> float:
-        return 1 / value
+        if value == 0:
+            raise Exception("Math Error")
+        else:
+            return 1 / value
 
     # Helpers
 

@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import Misc, ttk
 from helper.Calculator import Calculator
 
 
@@ -13,6 +13,8 @@ class NumpadFrame(ttk.Frame):
         self.calculator = Calculator()
 
         self.create_widgets(container)
+
+        self.n_root_active = False
 
     def create_widgets(self, container):
         buttons_text = [
@@ -89,6 +91,8 @@ class NumpadFrame(ttk.Frame):
             or self.display_text == "Math Error"
         ):
             container.display.label["text"] = self.btn_text
+        elif self.n_root_active:
+            container.display.label["text"] = self.btn_text + self.display_text
         else:
             container.display.label["text"] += self.btn_text
 
@@ -123,17 +127,25 @@ class NumpadFrame(ttk.Frame):
             container.display.label["text"] = "0"
 
     def equal(self, container):
-        try:
-            result = self.calculator.equals(self.display_text)
-            # TODO codice per implementazione senza funzione eval()
-            # result = self.calculator.solve_expression(display_text)
-            container.display.label["text"] = str(result)
-        except ZeroDivisionError:
-            self.calculator.clear()
-            container.display.label["text"] = "Math Error"
-        except SyntaxError:
-            self.calculator.clear()
-            container.display.label["text"] = "Syntax Error"
+        if self.display_text == "Syntax Error" or self.display_text == "Math Error":
+            container.display.label["text"] = "0"
+        elif "^" in self.display_text:
+            self.n_exponent(container)
+        elif "\u221A" in self.display_text:
+            self.n_root_active = False
+            self.n_root(container)
+        else:
+            try:
+                result = self.calculator.equals(self.display_text)
+                # TODO codice per implementazione senza funzione eval()
+                # result = self.calculator.solve_expression(display_text)
+                container.display.label["text"] = str(result)
+            except ZeroDivisionError:
+                self.calculator.clear()
+                container.display.label["text"] = "Math Error"
+            except SyntaxError:
+                self.calculator.clear()
+                container.display.label["text"] = "Syntax Error"
 
     def sin(self, container):
         try:
@@ -158,9 +170,66 @@ class NumpadFrame(ttk.Frame):
         except Exception:
             container.display.label["text"] = "Math Error"
 
+    def square(self, container):
+        self.equal(container)
+        try:
+            result = self.calculator.square(float(container.display.label["text"]))
+            container.display.label["text"] = str(result)
+        except ValueError:
+            container.display.label["text"] = "Syntax Error"
+
+    def n_exponent(self, container):
+        if "^" in self.display_text:
+            try:
+                number, exponent = map(float, self.display_text.split("^"))
+                result = self.calculator.n_exponent(number, exponent)
+                container.display.label["text"] = str(result)
+            except ValueError:
+                container.display.label["text"] = "Syntax Error"
+        else:
+            self.equal(container)
+            container.display.label["text"] += "^"
+
     def sqrt(self, container):
+        self.equal(container)
         try:
             result = self.calculator.sqrt(float(container.display.label["text"]))
+            container.display.label["text"] = str(result)
+        except ValueError:
+            container.display.label["text"] = "Syntax Error"
+        except Exception:
+            container.display.label["text"] = "Math Error"
+
+    def n_root(self, container):
+        if "\u221A" in self.display_text:
+            self.n_root_active = False
+            try:
+                exponent, base = map(float, self.display_text.split("\u221A"))
+                result = self.calculator.n_root(base, exponent)
+                container.display.label["text"] = str(result)
+            except ValueError:
+                container.display.label["text"] = "Syntax Error"
+            except Exception:
+                container.display.label["text"] = "Math Error"
+        else:
+            self.equal(container)
+            container.display.label["text"] = "\u221A" + container.display.label["text"]
+            self.n_root_active = True
+
+    def factorial(self, container):
+        self.equal(container)
+        try:
+            result = self.calculator.factorial(int(container.display.label["text"]))
+            container.display.label["text"] = str(result)
+        except ValueError:
+            container.display.label["text"] = "Syntax Error"
+        except Exception:
+            container.display.label["text"] = "Math Error"
+
+    def mutual(self, container):
+        self.equal(container)
+        try:
+            result = self.calculator.mutual(float(container.display.label["text"]))
             container.display.label["text"] = str(result)
         except ValueError:
             container.display.label["text"] = "Syntax Error"
@@ -170,6 +239,10 @@ class NumpadFrame(ttk.Frame):
     def onClick(self, event, container):
         self.display_text = container.display.label["text"]
         self.btn_text = event.widget["text"]
+
+        if self.display_text == "Syntax Error" or self.display_text == "Math Error":
+            container.display.label["text"] = "0"
+            return
 
         # Display numbers
 
@@ -206,7 +279,22 @@ class NumpadFrame(ttk.Frame):
         # TODO sec csc
 
         elif self.btn_text == "x^2":
+            self.square(container)
+
+        elif self.btn_text == "x^n":
+            self.n_exponent(container)
+
+        elif self.btn_text == "\u221A":
             self.sqrt(container)
+
+        elif self.btn_text == "\u02E3\u221A":
+            self.n_root(container)
+
+        elif self.btn_text == "n!":
+            self.factorial(container)
+
+        elif self.btn_text == "1/n":
+            self.mutual(container)
 
         # Memory
         elif self.btn_text == "STO":
