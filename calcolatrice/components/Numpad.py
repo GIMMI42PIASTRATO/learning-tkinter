@@ -104,6 +104,7 @@ class NumpadFrame(ttk.Frame):
             container.display.label["text"] = "Syntax Error"
         else:
             container.display.label["text"] += self.btn_text
+            self.n_root_active = False
 
             # TODO codice per implementazione senza funzione eval()
         #     try:
@@ -117,7 +118,14 @@ class NumpadFrame(ttk.Frame):
         #         container.display.label["text"] = "Math Error"
 
     def decimal_point(self, container):
-        if "." not in self.display_text:
+        if self.display_text[-1] == "." or self.display_text[-1] in [
+            "+",
+            "-",
+            "*",
+            "/",
+        ]:
+            container.display.label["text"] = "Syntax Error"
+        else:
             container.display.label["text"] += self.btn_text
 
     def delete(self, container):
