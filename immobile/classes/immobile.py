@@ -3,7 +3,7 @@ class Immobile:
         self.inserisci(codice, estensione, costo_m2, tax_pct)
 
     def __str__(self) -> str:
-        return f"codice: {self.get_codice()}\nestensione: {self.get_estensione()}\ncosto: {self.get_costo()}\npercentuale tasse: {self.get_percentuale_tasse}"
+        return f"codice: {self.get_codice()}\nestensione: {self.get_estensione()}\ncosto per metro quadro: {self.get_costo_m2()}\npercentuale tasse: {self.get_percentuale_tasse()}"
 
     # setter e getter
 
@@ -44,7 +44,7 @@ class Immobile:
         self.set_percentuale_tasse(tax_pct)
 
     def calcola_valore(self):
-        return self.get_costo_m2 * self.get_estensione()
+        return self.get_costo_m2() * self.get_estensione()
 
     def calcola_tassa(self):
-        return (self.calcola_valore * self.get_percentuale_tasse) / 100
+        return (self.calcola_valore() * self.get_percentuale_tasse()) / 100
