@@ -1,4 +1,6 @@
 from classes.immobile import Immobile
+from classes.alloggio import Alloggio
+from classes.garage import Garage
 
 
 class Menu:
@@ -8,27 +10,61 @@ class Menu:
     def __init__(self) -> None:
 
         for i in range(3):
-            print(f"Inserisci i valori per l'immmobile numero {i + 1}")
+            print(f"Inserisci il tipo dell'immobile numero {i + 1}\n1. Alloggio\n2. Garage\n3. Altro immobile")
+            while True:
+                tipo = input("Inserisci il tipo: ")
+                if tipo in ["1", "2", "3"]:
+                    break
+                else:
+                    print("Tipo non valido riprova")
+
+            tipo_immobile = {
+                "1": "Alloggio",
+                "2": "Garage",
+                "3": "Altro immobile",
+            }[tipo]
+        
+            print(f"Inserisci i valori per {tipo_immobile[tipo]} numero {i + 1}")
             codice = int(input(f"Inserisci il codice dell'immobile {i + 1}: "))
             estensione = float(
                 input(
-                    f"Inserisci l'estensione in metri quadri dell'immobile numero {i + 1}: "
+                    f"Inserisci l'estensione in metri quadri per {tipo_immobile[tipo]} numero {i + 1}: "
                 )
             )
             costo_m2 = float(
                 input(
-                    f"Inserisci il costo per metro quadro per l'immobile numero {i + 1}: "
+                    f"Inserisci il costo per metro quadro per {tipo_immobile[tipo]} numero {i + 1}: "
                 )
             )
             percentuale_tasse = int(
                 input(
-                    f"Inserisci la percetuale di tasse per l'immobile numero {i + 1}: "
+                    f"Inserisci la percetuale di tasse per {tipo_immobile[tipo]} numero {i + 1}: "
                 )
             )
+            
+            if tipo == "1":
+                vani_stanze = int(
+                    input(f"Inserisci il numero di vani e stanze per Alloggio numero {i + 1}: ")
+                    )
+                Menu.__immobili.append(
+                    Alloggio(codice, estensione, costo_m2, percentuale_tasse)
+                )
+            elif tipo == "2":
+                while True:
+                    interrato = input(f"Il garage {i + 1} è interrato? (si/no): ")
+                    if interrato in ["si", "no"]:
+                        break
+                    else:
+                        print("Risposta non valida riprova")
 
-            Menu.__immobili.append(
-                Immobile(codice, estensione, costo_m2, percentuale_tasse)
-            )
+                Menu.__immobili.append(
+                    Garage(codice, estensione, costo_m2, percentuale_tasse, interrato)
+                )
+            else:
+                Menu.__immobili.append(
+                    Immobile(codice, estensione, costo_m2, percentuale_tasse)
+                )
+
 
     @staticmethod
     def __stampa_menu():
