@@ -75,7 +75,7 @@ class Menu:
         opzione = 0
         while opzione != 6:
             Menu.__stampa_menu()
-            opzione = input("Inserisci il numero dell'opzione da eseguire")
+            opzione = input("Inserisci il numero dell'opzione da eseguire: ")
             if opzione.isdigit():
                 opzione = int(opzione)
 
@@ -137,7 +137,9 @@ class Menu:
                     immobile_maggiore_estensione = immobile
                     max_estensione = immobile.get_estensione()
 
-        print(immobile_maggiore_estensione)
+        print("---------------------------")
+        print(f"Immobile con maggiore estensione: {immobile_maggiore_estensione}")
+        print("---------------------------")
 
     @staticmethod
     def __stampa_tassa_media():
@@ -147,7 +149,9 @@ class Menu:
             / n_immobili
         )
 
-        print(tassa_media)
+        print("---------------------------")
+        print(f"Tassa media: {tassa_media}")
+        print("---------------------------")
 
     @staticmethod
     def __stampa_informazioni_immobile():
@@ -156,17 +160,18 @@ class Menu:
         immobile_trovato = False
 
         for _immobile in Menu.__immobili:
-            if _immobile.get_codice == id:
+            if _immobile.get_codice() == id:
                 immobile = _immobile
                 immobile_trovato = True
 
         if not immobile_trovato:
             print("Nessun immobile è stato trovato con questo codice")
         else:
-            costo_totale = immobile.calcola_valore() + immobile.calcola_tasse()
-
+            costo_totale = immobile.calcola_valore() + immobile.calcola_tassa()
+            print("---------------------------")
             print(f"Costo totale (tasse incluse): f{costo_totale}")
             print(f"Estensione: {immobile.get_estensione()}")
+            print("---------------------------")
 
 
 Menu()
