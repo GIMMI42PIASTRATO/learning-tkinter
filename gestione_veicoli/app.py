@@ -7,6 +7,9 @@ from classes.autocarro import Autocarro
 from classes.autoveicolo import Autoveicolo
 from classes.motoveicolo import Motoveicolo
 
+# Importing components
+from components.notebook import Notebook
+
 
 class App(tk.Tk):
     def __init__(self) -> None:
@@ -17,6 +20,7 @@ class App(tk.Tk):
         self.resizable(False, False)
 
         # Renderizzazione dei componenti
+        self.tabs = Notebook(self)
 
 
 if __name__ == "__main__":
