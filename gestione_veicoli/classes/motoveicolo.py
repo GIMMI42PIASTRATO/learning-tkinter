@@ -14,6 +14,9 @@ class Motoveicolo(Veicolo):
         super().__init__(targa, marca, modello, n_posti, prezzo_base)
         self.set_cilindrata(cilindrata)
 
+    def __str__(self) -> str:
+        return f"{super().__str__()} - Motoveicolo - {self.get_cilindrata()}cc"
+
     def set_cilindrata(self, valore: int):
         if valore > 0:
             self.__cilindrata = valore

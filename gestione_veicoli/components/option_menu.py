@@ -25,3 +25,5 @@ class OptionMenu(ttk.OptionMenu):
             self.concessionaria.set_filtro_veicoli(None)
         else:
             self.concessionaria.set_filtro_veicoli(self.option_var.get())
+
+        self.container.event_generate("<<OptionMenuChanged>>", when="tail")

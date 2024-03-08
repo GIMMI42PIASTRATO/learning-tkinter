@@ -12,7 +12,7 @@ class Veicolo(ABC):
         self.set_prezzo_base(prezzo_base)
 
     def __str__(self) -> str:
-        return f"{self.get_marca()} - {self.get_modello}"
+        return f"{self.get_marca()} - {self.get_modello()}"
 
     def set_targa(self, valore: str):
         if len(valore) == 7:
