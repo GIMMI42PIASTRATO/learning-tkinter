@@ -1,13 +1,15 @@
 import tkinter as tk
 from tkinter import ttk
+import time
 
 
 class OptionMenu(ttk.OptionMenu):
-    def __init__(self, container, options: list[str]):
+    def __init__(self, container, options: list[str], concessionaria):
 
         self.container = container
         self.options = options
         self.option_var = tk.StringVar()
+        self.concessionaria = concessionaria
 
         super().__init__(
             container,
@@ -19,4 +21,7 @@ class OptionMenu(ttk.OptionMenu):
         self.grid(row=0, column=2, sticky="e", padx=(0, 10))
 
     def option_changed(self, event):
-        print(self.option_var.get())
+        if self.option_var.get() == "Tutti":
+            self.concessionaria.filtro_veicoli = None
+        else:
+            self.concessionaria.filtro_veicoli = self.option_var.get()

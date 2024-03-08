@@ -3,9 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 
 # Importing classes
-from classes.autocarro import Autocarro
-from classes.autoveicolo import Autoveicolo
-from classes.motoveicolo import Motoveicolo
+from classes.concessionaria import Concessionaria
 
 # Importing components
 from components.notebook import Notebook
@@ -18,6 +16,9 @@ class App(tk.Tk):
         self.title("Gestione Veicoli")
         self.geometry("800x600")
         self.resizable(False, False)
+
+        # Inizializzazione della concessionaria
+        self.concessionaria = Concessionaria()
 
         # Renderizzazione dei componenti
         self.tabs = Notebook(self)

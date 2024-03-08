@@ -15,12 +15,13 @@ from components.tab_aggiungi_veicolo import TabAggiungiVeicolo
 
 
 class Notebook(ttk.Notebook):
-    def __init__(self, root) -> None:
-        super().__init__(root)
+    def __init__(self, container) -> None:
+
+        super().__init__(container)
         self.pack(fill="both", expand=True)
 
-        tab_veicoli = TabVeicoli(self)
+        tab_veicoli = TabVeicoli(self, app=container)
         self.add(tab_veicoli, text="Veicoli")
 
-        tab_aggiungi_veicolo = TabAggiungiVeicolo(self)
+        tab_aggiungi_veicolo = TabAggiungiVeicolo(self, app=container)
         self.add(tab_aggiungi_veicolo, text="Aggiungi Veicolo")

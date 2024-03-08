@@ -3,7 +3,7 @@ from tkinter import ttk
 
 
 class TabAggiungiVeicolo(ttk.Frame):
-    def __init__(self, container):
+    def __init__(self, container, app):
         super().__init__(container)
         self.grid(row=0, column=0, sticky="nsew")
 
