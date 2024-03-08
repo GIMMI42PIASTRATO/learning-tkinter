@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 
 # Importing classes
-from classes.concessionaria import Concessionaria
+from classes.concessionario import Concessionario
 
 # Importing components
 from components.notebook import Notebook
@@ -18,7 +18,15 @@ class App(tk.Tk):
         self.resizable(False, False)
 
         # Inizializzazione della concessionaria
-        self.concessionaria = Concessionaria()
+        self.concessionaria = Concessionario(
+            "Concessionaria",
+            "Via Roma",
+            "Roma",
+            12345,
+            "RM",
+            "1234567890",
+            "concessionaria@gmail.com",
+        )
 
         # Renderizzazione dei componenti
         self.tabs = Notebook(self)

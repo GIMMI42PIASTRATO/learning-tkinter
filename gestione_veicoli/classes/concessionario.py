@@ -1,3 +1,6 @@
+import typing
+
+# Importing classes
 from classes.autocarro import Autocarro
 from classes.autoveicolo import Autoveicolo
 from classes.motoveicolo import Motoveicolo
@@ -21,7 +24,13 @@ class Concessionario:
         self.set_provincia(provincia)
         self.set_telefono(telefono)
         self.set_email(email)
-        self.__veicoli = []
+        self.__veicoli = [
+            Autocarro("2347834", "Tesla", "Model X", 5, 1000, 5),
+            Autoveicolo("1234567", "Fiat", "Panda", 5, 1000, 5),
+            Motoveicolo("3434343", "Ducati", "Monster", 2, 1000, 2),
+        ]
+        self.__veicoli_filtrati = self.__veicoli
+        self.__conteggio_veicoli = len(self.__veicoli_filtrati)
 
     def __str__(self) -> str:
         return f"{self.__nome} - {self.__citta} ({self.__provincia}) - {self.__telefono} - {self.__email} - {len(self.__veicoli)} veicoli"
@@ -50,6 +59,12 @@ class Concessionario:
     def get_veicoli(self):
         return self.__veicoli
 
+    def get_veicoli_filtrati(self):
+        return self.__veicoli_filtrati
+
+    def get_conteggio_veicoli(self):
+        return self.__conteggio_veicoli
+
     def set_nome(self, nome: str):
         self.__nome = nome
 
@@ -71,7 +86,9 @@ class Concessionario:
     def set_email(self, email: str):
         self.__email = email
 
-    def set_veicoli(self, veicoli: list["Autocarro" | "Autoveicolo" | "Motoveicolo"]):
+    def set_veicoli(
+        self, veicoli: list[typing.Union["Autocarro", "Autoveicolo", "Motoveicolo"]]
+    ):
         self.__veicoli = veicoli
 
     # Metodi gestione Veicoli
@@ -140,3 +157,35 @@ class Concessionario:
 
         if not veicolo_trovato:
             print(f"Veicolo non trovato con targa: {targa}")
+
+    # Aggiungi veicolo
+    def aggiungi_veicolo(
+        self, veicolo: typing.Union["Autocarro", "Autoveicolo", "Motoveicolo"]
+    ):
+        # TODO implementa il metodo per funzionare sulla GUI
+        self.__veicoli.append(veicolo)
+        self.__conteggio_veicoli += 1
+
+    # Rimuovi veicolo
+    def rimuovi_veicolo(
+        self, veicolo: typing.Union["Autocarro", "Autoveicolo", "Motoveicolo"]
+    ):
+        # TODO implementa il metodo per funzionare sulla GUI
+        self.__veicoli.remove(veicolo)
+        self.__conteggio_veicoli -= 1
+
+    def set_filtro_veicoli(self, tipo_veicolo):
+        if tipo_veicolo is None:
+            self.__veicoli_filtrati = self.__veicoli
+        else:
+            tipo_vel = {
+                "Autoveicoli": Autoveicolo,
+                "Autocarri": Autocarro,
+                "Motoveicoli": Motoveicolo,
+            }[tipo_veicolo]
+
+            self.__veicoli_filtrati = [
+                veicolo for veicolo in self.__veicoli if isinstance(veicolo, tipo_vel)
+            ]
+
+        self.conteggio_veicoli = len(self.__veicoli_filtrati)

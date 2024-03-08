@@ -1,11 +1,3 @@
-import sys
-import os
-
-# Adding the path to the sys.path
-current_dir = os.path.dirname(__file__)
-gestione_veicoli_dir = os.path.abspath(os.path.join(current_dir, ".."))
-sys.path.append(gestione_veicoli_dir)
-
 # Component Imports
 from classes.autoveicolo import Autoveicolo
 from classes.autocarro import Autocarro
@@ -19,8 +11,9 @@ class Concessionaria:
             Autoveicolo("1234567", "Fiat", "Panda", 5, 1000, 5),
             Motoveicolo("3434343", "Ducati", "Monster", 2, 1000, 2),
         ]
+        self.veicoli_filtrati = self.veicoli
 
-        self.conteggio_veicoli = len(self.veicoli)
+        self.conteggio_veicoli = len(self.veicoli_filtrati)
 
     def add_veicolo(self, veicolo):
         self.veicoli.append(veicolo)
@@ -32,3 +25,19 @@ class Concessionaria:
 
     def get_veicoli(self):
         return self.veicoli
+
+    def set_filtro_veicoli(self, tipo_veicolo):
+        if tipo_veicolo is None:
+            self.veicoli_filtrati = self.veicoli
+        else:
+            tipo_vel = {
+                "Autoveicoli": Autoveicolo,
+                "Autocarri": Autocarro,
+                "Motoveicoli": Motoveicolo,
+            }[tipo_veicolo]
+
+            self.veicoli_filtrati = [
+                veicolo for veicolo in self.veicoli if isinstance(veicolo, tipo_vel)
+            ]
+
+        self.conteggio_veicoli = len(self.veicoli_filtrati)

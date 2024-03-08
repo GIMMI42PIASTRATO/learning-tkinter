@@ -22,6 +22,6 @@ class OptionMenu(ttk.OptionMenu):
 
     def option_changed(self, event):
         if self.option_var.get() == "Tutti":
-            self.concessionaria.filtro_veicoli = None
+            self.concessionaria.set_filtro_veicoli(None)
         else:
-            self.concessionaria.filtro_veicoli = self.option_var.get()
+            self.concessionaria.set_filtro_veicoli(self.option_var.get())
