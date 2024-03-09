@@ -24,15 +24,20 @@ class TabVeicoli(ttk.Frame):
         self.create_cards()
 
     def create_widgets(self):
-        # Create the widgets
+        # Number of vehicles
+        self.numero_veicoli_text = tk.StringVar()
         self.numero_veicoli = ttk.Label(
-            self, text=f"Numero veicoli: {self.concessionaria.get_conteggio_veicoli()}"
+            self, textvariable=self.numero_veicoli_text, 
         )
+        
+        
+         # Option Menu
         self.option_label = ttk.Label(self, text="Seleziona il tipo di veicolo: ")
         self.option_menu = OptionMenu(
             self,
             ["Tutti", "Autoveicoli", "Autocarri", "Motoveicoli"],
             self.concessionaria,
+            tab_veicoli=self
         )
 
         # Place the widgets
@@ -42,3 +47,8 @@ class TabVeicoli(ttk.Frame):
     def create_cards(self):
         for veicolo in self.concessionaria.get_veicoli_filtrati():
             print(veicolo)
+
+    def update_numero_veicoli(self):
+        self.numero_veicoli_text.set(
+            f"Numero di veicoli: {self.concessionaria.get_conteggio_veicoli()}"
+        )

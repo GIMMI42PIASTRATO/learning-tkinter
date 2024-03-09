@@ -187,5 +187,6 @@ class Concessionario:
             self.__veicoli_filtrati = [
                 veicolo for veicolo in self.__veicoli if isinstance(veicolo, tipo_vel)
             ]
+            print(self.__veicoli_filtrati)
 
-        self.conteggio_veicoli = len(self.__veicoli_filtrati)
+        self.__conteggio_veicoli = len(self.__veicoli_filtrati)

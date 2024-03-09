@@ -4,7 +4,7 @@ import time
 
 
 class OptionMenu(ttk.OptionMenu):
-    def __init__(self, container, options: list[str], concessionaria):
+    def __init__(self, container, options: list[str], concessionaria, tab_veicoli):
 
         self.container = container
         self.options = options
@@ -25,5 +25,6 @@ class OptionMenu(ttk.OptionMenu):
             self.concessionaria.set_filtro_veicoli(None)
         else:
             self.concessionaria.set_filtro_veicoli(self.option_var.get())
+            
+        self.container.update_numero_veicoli()
 
-        self.container.event_generate("<<OptionMenuChanged>>", when="tail")
