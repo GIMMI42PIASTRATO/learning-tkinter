@@ -4,7 +4,7 @@ import time
 
 
 class OptionMenu(ttk.OptionMenu):
-    def __init__(self, container, options: list[str], concessionaria, tab_veicoli):
+    def __init__(self, container, options: list[str], concessionaria):
 
         self.container = container
         self.options = options
@@ -27,4 +27,5 @@ class OptionMenu(ttk.OptionMenu):
             self.concessionaria.set_filtro_veicoli(self.option_var.get())
             
         self.container.update_numero_veicoli()
+        self.container.create_veicoli_widgets()
 

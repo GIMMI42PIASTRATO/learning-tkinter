@@ -21,7 +21,7 @@ class TabVeicoli(ttk.Frame):
         self.concessionaria = app.concessionaria
 
         self.create_widgets()
-        self.create_cards()
+        self.create_veicoli_widgets()
 
     def create_widgets(self):
         # Number of vehicles
@@ -34,21 +34,26 @@ class TabVeicoli(ttk.Frame):
          # Option Menu
         self.option_label = ttk.Label(self, text="Seleziona il tipo di veicolo: ")
         self.option_menu = OptionMenu(
-            self,
-            ["Tutti", "Autoveicoli", "Autocarri", "Motoveicoli"],
-            self.concessionaria,
-            tab_veicoli=self
+            container=self,
+            options=["Tutti", "Autoveicoli", "Autocarri", "Motoveicoli"],
+            concessionaria=self.concessionaria,
         )
 
         # Place the widgets
         self.numero_veicoli.grid(row=0, column=0, sticky="w", padx=(10, 0))
         self.option_label.grid(row=0, column=1, sticky="e")
 
-    def create_cards(self):
-        for veicolo in self.concessionaria.get_veicoli_filtrati():
-            print(veicolo)
-
     def update_numero_veicoli(self):
         self.numero_veicoli_text.set(
             f"Numero di veicoli: {self.concessionaria.get_conteggio_veicoli()}"
         )
+
+    def create_veicoli_widgets(self):
+        # Clear the frame
+        for widget in self.winfo_children():
+            if widget != self.numero_veicoli and widget != self.option_label and widget != self.option_menu:
+                widget.destroy()
+
+        # Create the widgets
+        for veicolo in self.concessionaria.get_veicoli_filtrati():
+            pass

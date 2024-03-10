@@ -59,6 +59,7 @@ class Concessionario:
     def get_veicoli(self):
         return self.__veicoli
 
+    #* Get veicoli filtrati
     def get_veicoli_filtrati(self):
         return self.__veicoli_filtrati
 
@@ -91,60 +92,60 @@ class Concessionario:
     ):
         self.__veicoli = veicoli
 
-    # Metodi gestione Veicoli
-    def stampa_veicoli(self):
-        # TODO implementa il metodo per funzionare sulla GUI
-        for veicolo in self.__veicoli:
-            print(veicolo)
+    # # Metodi gestione Veicoli
+    # def stampa_veicoli(self):
+    #     # TODO implementa il metodo per funzionare sulla GUI
+    #     for veicolo in self.__veicoli:
+    #         print(veicolo)
 
-    def stampa_numero_veicoli(self):
-        # TODO implementa il metodo per funzionare sulla GUI
-        print(len(self.__veicoli))
+    # def stampa_numero_veicoli(self):
+    #     # TODO implementa il metodo per funzionare sulla GUI
+    #     print(len(self.__veicoli))
 
-    # Metodi gestione Autoveicoli
-    def stampa_autoveicoli(self):
-        # TODO implementa il metodo per funzionare sulla GUI
-        for veicolo in self.__veicoli:
-            if isinstance(veicolo, Autoveicolo):
-                print(veicolo)
+    # # Metodi gestione Autoveicoli
+    # def stampa_autoveicoli(self):
+    #     # TODO implementa il metodo per funzionare sulla GUI
+    #     for veicolo in self.__veicoli:
+    #         if isinstance(veicolo, Autoveicolo):
+    #             print(veicolo)
 
-    def stampa_numero_autoveicoli(self):
-        # TODO implementa il metodo per funzionare sulla GUI
-        count = 0
-        for veicolo in self.__veicoli:
-            if isinstance(veicolo, Autoveicolo):
-                count += 1
-        print(count)
+    # def stampa_numero_autoveicoli(self):
+    #     # TODO implementa il metodo per funzionare sulla GUI
+    #     count = 0
+    #     for veicolo in self.__veicoli:
+    #         if isinstance(veicolo, Autoveicolo):
+    #             count += 1
+    #     print(count)
 
-    # Metodi gestione Autocarri
-    def stampa_autocarri(self):
-        # TODO implementa il metodo per funzionare sulla GUI
-        for veicolo in self.__veicoli:
-            if isinstance(veicolo, Autocarro):
-                print(veicolo)
+    # # Metodi gestione Autocarri
+    # def stampa_autocarri(self):
+    #     # TODO implementa il metodo per funzionare sulla GUI
+    #     for veicolo in self.__veicoli:
+    #         if isinstance(veicolo, Autocarro):
+    #             print(veicolo)
 
-    def stampa_numero_autocarri(self):
-        # TODO implementa il metodo per funzionare sulla GUI
-        count = 0
-        for veicolo in self.__veicoli:
-            if isinstance(veicolo, Autocarro):
-                count += 1
-        print(count)
+    # def stampa_numero_autocarri(self):
+    #     # TODO implementa il metodo per funzionare sulla GUI
+    #     count = 0
+    #     for veicolo in self.__veicoli:
+    #         if isinstance(veicolo, Autocarro):
+    #             count += 1
+    #     print(count)
 
-    # Metodi gestione Motoveicoli
-    def stampa_motoveicoli(self):
-        # TODO implementa il metodo per funzionare sulla GUI
-        for veicolo in self.__veicoli:
-            if isinstance(veicolo, Motoveicolo):
-                print(veicolo)
+    # # Metodi gestione Motoveicoli
+    # def stampa_motoveicoli(self):
+    #     # TODO implementa il metodo per funzionare sulla GUI
+    #     for veicolo in self.__veicoli:
+    #         if isinstance(veicolo, Motoveicolo):
+    #             print(veicolo)
 
-    def stampa_numero_motoveicoli(self):
-        # TODO implementa il metodo per funzionare sulla GUI
-        count = 0
-        for veicolo in self.__veicoli:
-            if isinstance(veicolo, Motoveicolo):
-                count += 1
-        print(count)
+    # def stampa_numero_motoveicoli(self):
+    #     # TODO implementa il metodo per funzionare sulla GUI
+    #     count = 0
+    #     for veicolo in self.__veicoli:
+    #         if isinstance(veicolo, Motoveicolo):
+    #             count += 1
+    #     print(count)
 
     # Stampa veicolo data la targa
     def stampa_veicolo(self, targa: str):
@@ -174,6 +175,7 @@ class Concessionario:
         self.__veicoli.remove(veicolo)
         self.__conteggio_veicoli -= 1
 
+    #* Set filtro veicoli
     def set_filtro_veicoli(self, tipo_veicolo):
         if tipo_veicolo is None:
             self.__veicoli_filtrati = self.__veicoli
@@ -187,6 +189,5 @@ class Concessionario:
             self.__veicoli_filtrati = [
                 veicolo for veicolo in self.__veicoli if isinstance(veicolo, tipo_vel)
             ]
-            print(self.__veicoli_filtrati)
 
         self.__conteggio_veicoli = len(self.__veicoli_filtrati)
