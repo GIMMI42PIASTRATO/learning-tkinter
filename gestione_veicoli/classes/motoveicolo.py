@@ -15,7 +15,7 @@ class Motoveicolo(Veicolo):
         self.set_cilindrata(cilindrata)
 
     def __str__(self) -> str:
-        return f"{super().__str__()} - Motoveicolo - {self.get_cilindrata()}cc"
+        return f"{super().__str__()} - Motoveicolo - {self.get_prezzo()}€"
 
     def set_cilindrata(self, valore: int):
         if valore > 0:

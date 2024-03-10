@@ -15,7 +15,7 @@ class Autocarro(Veicolo):
         self.set_max_carico(max_carico)
 
     def __str__(self) -> str:
-        return f"{super().__str__()} - Autocarro - {self.get_prezzo()}"
+        return f"{super().__str__()} - Autocarro - {self.get_prezzo()}€"
 
     def set_max_carico(self, valore: float):
         if valore > 0:

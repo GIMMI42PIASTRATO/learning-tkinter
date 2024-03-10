@@ -15,7 +15,7 @@ class Autoveicolo(Veicolo):
         self.set_numero_porte(numero_porte)
 
     def __str__(self) -> str:
-        return f"{super().__str__()} - Autoveicolo - {self.get_numero_porte()} porte"
+        return f"{super().__str__()} - Autoveicolo - {self.get_prezzo()}€"
 
     def set_numero_porte(self, numero_porte: int):
         if numero_porte <= 0:

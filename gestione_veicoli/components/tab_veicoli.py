@@ -29,7 +29,7 @@ class TabVeicoli(ttk.Frame):
         self.numero_veicoli = ttk.Label(
             self, textvariable=self.numero_veicoli_text, 
         )
-        
+        self.update_numero_veicoli()
         
          # Option Menu
         self.option_label = ttk.Label(self, text="Seleziona il tipo di veicolo: ")
