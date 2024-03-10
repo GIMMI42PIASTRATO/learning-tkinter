@@ -10,6 +10,7 @@ sys.path.append(gestione_veicoli_dir)
 
 # Importing components
 from components.option_menu import OptionMenu
+from components.veicolo_card import Card
 
 
 class TabVeicoli(ttk.Frame):
@@ -21,17 +22,19 @@ class TabVeicoli(ttk.Frame):
         self.concessionaria = app.concessionaria
 
         self.create_widgets()
+
         self.create_veicoli_widgets()
 
     def create_widgets(self):
         # Number of vehicles
         self.numero_veicoli_text = tk.StringVar()
         self.numero_veicoli = ttk.Label(
-            self, textvariable=self.numero_veicoli_text, 
+            self,
+            textvariable=self.numero_veicoli_text,
         )
         self.update_numero_veicoli()
-        
-         # Option Menu
+
+        # Option Menu
         self.option_label = ttk.Label(self, text="Seleziona il tipo di veicolo: ")
         self.option_menu = OptionMenu(
             container=self,
@@ -51,9 +54,17 @@ class TabVeicoli(ttk.Frame):
     def create_veicoli_widgets(self):
         # Clear the frame
         for widget in self.winfo_children():
-            if widget != self.numero_veicoli and widget != self.option_label and widget != self.option_menu:
+            if (
+                widget != self.numero_veicoli
+                and widget != self.option_label
+                and widget != self.option_menu
+            ):
                 widget.destroy()
 
-        # Create the widgets
-        for veicolo in self.concessionaria.get_veicoli_filtrati():
-            pass
+        # Card container
+        self.card_container = ttk.Frame(self)
+        self.card_container.grid(row=1, column=0, columnspan=3, sticky="nsew", padx=10, pady=10)
+        for i, veicolo in enumerate(self.concessionaria.get_veicoli_filtrati()):
+            # Create a card for each vehicle
+            Card(self.card_container, veicolo, row=i, column=0)
+            

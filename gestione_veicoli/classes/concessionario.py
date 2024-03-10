@@ -59,7 +59,7 @@ class Concessionario:
     def get_veicoli(self):
         return self.__veicoli
 
-    #* Get veicoli filtrati
+    # * Get veicoli filtrati
     def get_veicoli_filtrati(self):
         return self.__veicoli_filtrati
 
@@ -175,7 +175,7 @@ class Concessionario:
         self.__veicoli.remove(veicolo)
         self.__conteggio_veicoli -= 1
 
-    #* Set filtro veicoli
+    # * Set filtro veicoli
     def set_filtro_veicoli(self, tipo_veicolo):
         if tipo_veicolo is None:
             self.__veicoli_filtrati = self.__veicoli

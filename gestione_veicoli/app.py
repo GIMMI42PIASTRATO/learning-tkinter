@@ -1,6 +1,7 @@
 # Importing Tkinter
 import tkinter as tk
 from tkinter import ttk
+import sv_ttk
 
 # Importing classes
 from classes.concessionario import Concessionario
@@ -34,4 +35,5 @@ class App(tk.Tk):
 
 if __name__ == "__main__":
     app = App()
+    sv_ttk.set_theme("dark")
     app.mainloop()
