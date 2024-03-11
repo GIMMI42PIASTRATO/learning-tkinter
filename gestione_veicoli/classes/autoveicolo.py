@@ -28,3 +28,6 @@ class Autoveicolo(Veicolo):
 
     def get_prezzo(self):
         return self.get_prezzo_base() * self.get_numero_porte()
+    
+    def get_tipo(self):
+        return "Autoveicolo"

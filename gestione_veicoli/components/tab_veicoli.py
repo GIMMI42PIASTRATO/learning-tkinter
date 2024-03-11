@@ -63,7 +63,7 @@ class TabVeicoli(ttk.Frame):
                 widget.destroy()
 
         # Card container
-        self.card_container = CTkScrollableFrame(self, orientation="vertical", border_color="#ff0000")
+        self.card_container = CTkScrollableFrame(self, orientation="vertical", corner_radius=0, fg_color="#1c1c1c")
         self.card_container.grid(row=1, column=0, columnspan=3, sticky="nsew", pady = (10, 0))
 
         # Configure the grid
