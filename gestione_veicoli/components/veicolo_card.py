@@ -5,7 +5,7 @@ from PIL import ImageTk, Image
 class Card(ttk.Frame):
     def __init__(self, container, veicolo, row: int, column: int):
         super().__init__(container)
-        self.grid(row=row, column=column, sticky="nsew", ipadx=10, ipady=10)
+        self.grid(row=row, column=column, sticky="nsew")
 
         self.veicolo = veicolo
         self.img = ImageTk.PhotoImage(Image.open("gestione_veicoli/image/bugatti.png").resize((200, 200)))

@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from customtkinter import CTkScrollableFrame
 import os
 import sys
 
@@ -62,9 +63,20 @@ class TabVeicoli(ttk.Frame):
                 widget.destroy()
 
         # Card container
-        self.card_container = ttk.Frame(self)
-        self.card_container.grid(row=1, column=0, columnspan=3, sticky="nsew", padx=10, pady=10)
+        self.card_container = CTkScrollableFrame(self, orientation="vertical", border_color="#ff0000")
+        self.card_container.grid(row=1, column=0, columnspan=3, sticky="nsew", pady = (10, 0))
+
+        # Configure the grid
+        self.grid_rowconfigure(1, weight=1)  # Espansione verticale
+        self.grid_columnconfigure(0, weight=1)  # Espansione orizzontale
+
+        # Define numers of columns
+        num_columns = 3
+
         for i, veicolo in enumerate(self.concessionaria.get_veicoli_filtrati()):
-            # Create a card for each vehicle
-            Card(self.card_container, veicolo, row=i, column=0)
+            # Calculate column and row index
+            row = i // num_columns
+            column = i % num_columns
+            # Create the card
+            Card(self.card_container, veicolo, row=row, column=column)
             
