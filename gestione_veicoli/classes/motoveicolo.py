@@ -28,6 +28,6 @@ class Motoveicolo(Veicolo):
 
     def get_prezzo(self):
         return self.get_prezzo_base() * self.get_cilindrata()
-    
+
     def get_tipo(self):
         return "Motoveicolo"

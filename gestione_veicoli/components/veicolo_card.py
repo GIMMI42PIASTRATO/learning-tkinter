@@ -9,7 +9,9 @@ class Card(CTkFrame):
         self.grid(row=row, column=column, sticky="nsew", padx=25, pady=10)
 
         self.veicolo = veicolo
-        self.img = ImageTk.PhotoImage(Image.open("gestione_veicoli/image/bugatti.png").resize((200, 200)))
+        self.img = ImageTk.PhotoImage(
+            Image.open("gestione_veicoli/image/bugatti.png").resize((200, 200))
+        )
         self.create_widgets()
 
     def create_widgets(self):
@@ -18,11 +20,15 @@ class Card(CTkFrame):
         self.image.grid(row=0, column=0, sticky="nsew")
 
         # Marca e Modello
-        self.title = ttk.Label(self, text=f"{self.veicolo.get_marca()} {self.veicolo.get_modello()}")
+        self.title = ttk.Label(
+            self, text=f"{self.veicolo.get_marca()} {self.veicolo.get_modello()}"
+        )
         self.title.grid(row=1, column=0, sticky="nsew")
 
         # Tipo di veicolo
-        self.tipo_veicolo = ttk.Label(self, text=f"Tipo veicolo: {self.veicolo.get_tipo()}")
+        self.tipo_veicolo = ttk.Label(
+            self, text=f"Tipo veicolo: {self.veicolo.get_tipo()}"
+        )
         self.tipo_veicolo.grid(row=2, column=0, sticky="nsew")
 
         # Price

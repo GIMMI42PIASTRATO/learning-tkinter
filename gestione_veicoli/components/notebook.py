@@ -12,6 +12,7 @@ import os
 # Component Imports
 from components.tab_veicoli import TabVeicoli
 from components.tab_aggiungi_veicolo import TabAggiungiVeicolo
+from components.tab_cerca_veicolo import TabCercaVeicolo
 
 
 class Notebook(ttk.Notebook):
@@ -25,3 +26,6 @@ class Notebook(ttk.Notebook):
 
         tab_aggiungi_veicolo = TabAggiungiVeicolo(self, app=container)
         self.add(tab_aggiungi_veicolo, text="Aggiungi Veicolo")
+
+        tab_cerca_veicolo = TabCercaVeicolo(self, app=container)
+        self.add(tab_cerca_veicolo, text="Cerca Veicolo")

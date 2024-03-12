@@ -10,7 +10,9 @@ class Menu:
     def __init__(self) -> None:
 
         for i in range(3):
-            print(f"Inserisci il tipo dell'immobile numero {i + 1}\n1. Alloggio\n2. Garage\n3. Altro immobile")
+            print(
+                f"Inserisci il tipo dell'immobile numero {i + 1}\n1. Alloggio\n2. Garage\n3. Altro immobile"
+            )
             while True:
                 tipo = int(input("Inserisci il tipo: "))
                 if tipo in [1, 2, 3]:
@@ -23,9 +25,11 @@ class Menu:
                 2: "Garage",
                 3: "Altro immobile",
             }[tipo]
-        
+
             print(f"Inserisci i valori per {tipo_immobile} numero {i + 1}")
-            codice = int(input(f"Inserisci il codice per {tipo_immobile} numero {i + 1}: "))
+            codice = int(
+                input(f"Inserisci il codice per {tipo_immobile} numero {i + 1}: ")
+            )
             estensione = float(
                 input(
                     f"Inserisci l'estensione in metri quadri per {tipo_immobile} numero {i + 1}: "
@@ -41,13 +45,17 @@ class Menu:
                     f"Inserisci la percetuale di tasse per {tipo_immobile} numero {i + 1}: "
                 )
             )
-            
+
             if tipo == 1:
                 vani_stanze = int(
-                    input(f"Inserisci il numero di vani e stanze per Alloggio numero {i + 1}: ")
+                    input(
+                        f"Inserisci il numero di vani e stanze per Alloggio numero {i + 1}: "
                     )
+                )
                 Menu.__immobili.append(
-                    Alloggio(codice, estensione, costo_m2, percentuale_tasse, vani_stanze)
+                    Alloggio(
+                        codice, estensione, costo_m2, percentuale_tasse, vani_stanze
+                    )
                 )
             elif tipo == 2:
                 while True:
@@ -65,10 +73,11 @@ class Menu:
                     Immobile(codice, estensione, costo_m2, percentuale_tasse)
                 )
 
-
     @staticmethod
     def __stampa_menu():
-        print("1. Stampa dati dell'immobile dato il codice\n2. Stampa i dati degli immobili il cui valore è compreso in un range\n3. Stampa dati dell'immobile con maggiore estensione\n4. Stampa tassa media\n5. Stampa costo totale comprese tasse e l'estensione\n6. Esci")
+        print(
+            "1. Stampa dati dell'immobile dato il codice\n2. Stampa i dati degli immobili il cui valore è compreso in un range\n3. Stampa dati dell'immobile con maggiore estensione\n4. Stampa tassa media\n5. Stampa costo totale comprese tasse e l'estensione\n6. Esci"
+        )
 
     @staticmethod
     def scegli_opzione():

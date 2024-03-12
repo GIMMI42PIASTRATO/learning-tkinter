@@ -28,6 +28,6 @@ class Autocarro(Veicolo):
 
     def get_max_carico(self):
         return self.__max_carico
-    
+
     def get_tipo(self):
         return "Autocarro"
