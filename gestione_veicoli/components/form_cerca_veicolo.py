@@ -8,6 +8,7 @@ class FormCercaVeicolo(CTkFrame):
 
         self.concessionaria = app.concessionaria
         self.update_img = container.update_img
+        self.update_info = container.update_info
 
         self.create_widgets()
 
@@ -33,6 +34,8 @@ class FormCercaVeicolo(CTkFrame):
             if veicolo:
                 self.error_label.configure(text="")
                 self.update_img(veicolo.get_tipo())
+                self.update_info(veicolo)
+
             else:
                 self.error_label.configure(text="Veicolo non trovato")
         else:
