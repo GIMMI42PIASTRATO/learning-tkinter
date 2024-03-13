@@ -147,17 +147,11 @@ class Concessionario:
     #             count += 1
     #     print(count)
 
-    # Stampa veicolo data la targa
-    def stampa_veicolo(self, targa: str):
-        # TODO implementa il metodo per funzionare sulla GUI
-        veicolo_trovato = False
+    #* Restituisce veicolo data la targa
+    def restituisci_veicolo(self, targa: str):
         for veicolo in self.__veicoli:
             if veicolo.get_targa() == targa:
-                print(veicolo)
-                veicolo_trovato = True
-
-        if not veicolo_trovato:
-            print(f"Veicolo non trovato con targa: {targa}")
+                return veicolo
 
     # Aggiungi veicolo
     def aggiungi_veicolo(

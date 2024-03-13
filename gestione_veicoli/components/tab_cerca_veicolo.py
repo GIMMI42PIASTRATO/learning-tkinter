@@ -17,7 +17,7 @@ class TabCercaVeicolo(CTkFrame):
     def create_widgets(self):
 
         # Creating the image
-        self.img = CTkLabel(self, image=ImageTk.PhotoImage(Image.open("gestione_veicoli/image/No-Image-Placeholder.png").resize((300, 300))))
+        self.img = CTkLabel(self, text="", image=ImageTk.PhotoImage(Image.open("gestione_veicoli/image/No-Image-Placeholder.png").resize((300, 300))))
 
         # Creating the form
         self.form_cerca_veicolo = FormCercaVeicolo(self, self.app, fg_color="#2b2b2b")
