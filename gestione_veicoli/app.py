@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 import sv_ttk
+import customtkinter
 
 # Importing classes
 from classes.concessionario import Concessionario
@@ -36,4 +37,5 @@ class App(tk.Tk):
 if __name__ == "__main__":
     app = App()
     sv_ttk.set_theme("dark")
+    customtkinter.set_appearance_mode("dark")
     app.mainloop()
