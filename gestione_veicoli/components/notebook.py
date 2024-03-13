@@ -21,11 +21,15 @@ class Notebook(ttk.Notebook):
         super().__init__(container)
         self.pack(fill="both", expand=True)
 
-        tab_veicoli = TabVeicoli(self, app=container)
-        self.add(tab_veicoli, text="Veicoli")
+        self.tab_veicoli = TabVeicoli(self, app=container)
+        self.add(self.tab_veicoli, text="Veicoli")
 
-        tab_aggiungi_veicolo = TabAggiungiVeicolo(self, app=container)
-        self.add(tab_aggiungi_veicolo, text="Aggiungi Veicolo")
+        self.tab_aggiungi_veicolo = TabAggiungiVeicolo(self, app=container)
+        self.add(self.tab_aggiungi_veicolo, text="Aggiungi Veicolo")
 
-        tab_cerca_veicolo = TabCercaVeicolo(self, app=container)
-        self.add(tab_cerca_veicolo, text="Cerca Veicolo")
+        self.tab_cerca_veicolo = TabCercaVeicolo(self, app=container)
+        self.add(self.tab_cerca_veicolo, text="Cerca Veicolo")
+
+    def refresh(self):
+        self.tab_veicoli.option_menu.option_var.set("Tutti")
+        self.tab_veicoli.option_menu.option_changed(None)

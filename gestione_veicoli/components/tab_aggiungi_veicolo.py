@@ -15,6 +15,7 @@ class TabAggiungiVeicolo(CTkFrame):
         self.rowconfigure(0, weight=1)
 
         self.app = app
+        self.notebook = container
 
         self.create_widgets()
 
@@ -24,7 +25,7 @@ class TabAggiungiVeicolo(CTkFrame):
         self.img = CTkFrame(
             self, fg_color="white", corner_radius=15, width=300, height=300
         )
-        self.form = Form(self, app=self.app, fg_color="#2b2b2b", corner_radius=15)
+        self.form = Form(self, app=self.app, notebook=self.notebook, fg_color="#2b2b2b", corner_radius=15)
 
         # Place the widgets
         self.img.grid(row=0, column=0, sticky="n", padx=30, pady=30)

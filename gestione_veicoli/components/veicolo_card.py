@@ -9,8 +9,13 @@ class Card(CTkFrame):
         self.grid(row=row, column=column, sticky="nsew", padx=25, pady=10)
 
         self.veicolo = veicolo
+        image_path = {
+            "Autoveicolo": "gestione_veicoli/image/bugatti.png",
+            "Autocarro": "gestione_veicoli/image/truck-slider-dc.png",
+            "Motoveicolo": "gestione_veicoli/image/tim-meyer-2LTMNCN4nEg-unsplash.jpg",
+        }[veicolo.get_tipo()]
         self.img = ImageTk.PhotoImage(
-            Image.open("gestione_veicoli/image/bugatti.png").resize((200, 200))
+            Image.open(image_path).resize((200, 200))
         )
         self.create_widgets()
 
