@@ -42,4 +42,7 @@ class TabCercaVeicolo(CTkFrame):
 
     def update_info(self, veicolo):
         self.info_veicolo.display_info(veicolo)
-        
+
+    def remove_info(self):
+        self.info_veicolo.remove_info()
+        self.img.configure(image=ImageTk.PhotoImage(Image.open("gestione_veicoli/image/No-Image-Placeholder.png").resize((300, 300))))

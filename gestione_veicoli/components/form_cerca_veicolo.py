@@ -9,6 +9,7 @@ class FormCercaVeicolo(CTkFrame):
         self.concessionaria = app.concessionaria
         self.update_img = container.update_img
         self.update_info = container.update_info
+        self.remove_info = container.remove_info
 
         self.create_widgets()
 
@@ -38,6 +39,8 @@ class FormCercaVeicolo(CTkFrame):
 
             else:
                 self.error_label.configure(text="Veicolo non trovato")
+                self.remove_info()
         else:
             self.error_label.configure(text="Targa non valida")
+            self.remove_info()
         
