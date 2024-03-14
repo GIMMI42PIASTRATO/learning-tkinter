@@ -22,11 +22,12 @@ class TabAggiungiVeicolo(CTkFrame):
     def create_widgets(self):
         # Create the widgets
         # TODO - Turn it into a label with an image
-        self.img = CTkFrame(
-            self, fg_color="white", corner_radius=15, width=300, height=300
-        )
+        # self.img = CTkFrame(
+        #     self, fg_color="white", corner_radius=15, width=300, height=300
+        # )
         self.form = Form(self, app=self.app, notebook=self.notebook, fg_color="#2b2b2b", corner_radius=15)
 
         # Place the widgets
-        self.img.grid(row=0, column=0, sticky="n", padx=30, pady=30)
-        self.form.grid(row=0, column=1, sticky="nsew", pady=30, padx=(0, 30))
+        # self.img.grid(row=0, column=0, sticky="n", padx=30, pady=30)
+        # self.form.grid(row=0, column=1, sticky="nsew", pady=30, padx=(0, 30))
+        self.form.pack(fill="both", expand=True, padx=30, pady=30)

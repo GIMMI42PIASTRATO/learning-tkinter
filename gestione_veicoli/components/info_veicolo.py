@@ -41,6 +41,7 @@ class InfoVeicolo(CTkFrame):
         self.info_tipo_veicolo.configure(text=f"Tipo veicolo: {veicolo.get_tipo()}")
         self.info_numero_posti.configure(text=f"Numero posti: {veicolo.get_numero_posti()}")
         self.info_prezzo_base.configure(text=f"Prezzo base: {veicolo.get_prezzo_base()}")
+        self.info_prezzo.configure(text=f"Prezzo: {veicolo.get_prezzo()}")
         self.info_variable.configure(text=f"{text[0]} {text[1]()} {text[2]}")
         self.info_targa.configure(text=f"Targa: {veicolo.get_targa()}")
 

@@ -20,6 +20,8 @@ class FormCercaVeicolo(CTkFrame):
         self.cerca_veicolo_entry = CTkEntry(self, placeholder_text="Inserisci la targa del veicolo")
         self.error_label = CTkLabel(self, text_color="red", text="")
         self.cerca_button = CTkButton(self, text="Cerca veicolo", command=self.on_click)
+        # Bind the enter key to the entry
+        self.cerca_veicolo_entry.bind("<Return>", lambda e: self.on_click())
 
         # Place the widgets in the form
         self.cerca_veicolo_label.grid(row=0, column=0, sticky="w", padx=10, pady=10)
